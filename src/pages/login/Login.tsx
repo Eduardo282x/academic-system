@@ -1,6 +1,7 @@
 
 import { Button } from 'primereact/button';
 import { InputText } from "primereact/inputtext";
+import { Password } from 'primereact/password';
 import { useForm } from 'react-hook-form';
 
 export const Login = () => {
@@ -13,12 +14,12 @@ export const Login = () => {
             <form onSubmit={handleSubmit(data => console.log(data))}>
                 <div className="flex flex-col items-start justify-center h-[10rem]">
                     <label className=' text-white ml-4 mb-2'>Username</label>
-                    <InputText id="username" {...register('username')} />
+                    <InputText {...register('username')} />
                 </div>
 
                 <div className="flex flex-col items-start justify-center h-[10rem]">
                     <label className=' text-white ml-4 mb-2'>Password</label>
-                    <InputText id="username" {...register('password')} />
+                    <Password {...register('password')} feedback={false} toggleMask/>
                 </div>
 
                 <div className="flex items-center justify-center">
