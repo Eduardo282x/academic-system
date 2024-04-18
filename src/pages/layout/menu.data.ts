@@ -3,6 +3,7 @@ export interface IMenu {
     icon: string;
     redirect: string;
     rol: string[];
+    color?: string;
     children?: ItemsMenu[];
 
 }
@@ -18,24 +19,28 @@ export const menu: IMenu[] = [
         title: 'Inicio',
         icon: 'home',
         redirect: '/home',
-        rol: ['admin','student','teacher']
+        color: 'bg-violet-500',
+        rol: ['Administrador','Estudiante','Profesor']
     },
     {
         title: 'Materias',
         icon: 'cast_for_education',
         redirect: '/cursos',
-        rol: ['student','teacher']
+        color: 'bg-rose-500',
+        rol: ['Estudiante','Profesor']
     },
     {
         title: 'Usuarios',
         icon: 'group',
         redirect: '/usuarios',
-        rol: ['admin']
+        color: 'bg-teal-500',
+        rol: ['Administrador']
     },
     {
         title: 'Alumnos',
         icon: 'groups',
         redirect: '/alumnos',
-        rol: ['admin', 'teacher']
+        color: 'bg-orange-500',
+        rol: ['Administrador', 'Profesor']
     },
 ]

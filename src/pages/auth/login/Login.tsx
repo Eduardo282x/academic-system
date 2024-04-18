@@ -23,7 +23,7 @@ export const Login = () => {
     };
 
     const onSubmit = (data: UserLogin) => {
-        postDataApi('/auth/login', data).then((response: ResponseLogin | BaseResponse | any) => {
+        postDataApi('auth/login', data).then((response: ResponseLogin | BaseResponse | any) => {
             showMessage(response.message, toastBottomCenter, response.success ? 'success' : 'error');
             if(response.success){
                 localStorage.setItem('token', JSON.stringify(response.userData) )
@@ -46,10 +46,10 @@ export const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                 <div className="flex flex-col items-start justify-center h-auto my-8 w-[80%] mx-auto">
                     <label className=' text-white ml-2 mb-2'>Nombre de usuario</label>
-                    <Controller name="name" control={control} render={({ field }) => (
+                    <Controller name="username" control={control} render={({ field }) => (
                         <InputText id={field.name} {...field} className="w-full" autoFocus/>
                     )} />
-                    {getFormErrorMessage('name')}
+                    {getFormErrorMessage('username')}
                 </div>
 
                 <div className="flex flex-col items-start justify-center h-auto my-8 w-[80%] mx-auto">

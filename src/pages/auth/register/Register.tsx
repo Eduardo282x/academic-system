@@ -6,6 +6,8 @@ import { Password } from 'primereact/password';
 import { Toast } from 'primereact/toast';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { postDataApi } from '../../../backend/BaseAxios';
+import { BaseResponse } from '../../../interfaces/base-response.interface';
 
 export const Register = () => {
     const toastBottomCenter = useRef(null);
@@ -21,9 +23,17 @@ export const Register = () => {
     };
 
     const onSubmit = (data: UserRegister) => {
+        data.rolId = 2;
         console.log(data);
-        showMessage('Registro existoso', toastBottomCenter, 'success');
-        navigate('/')
+        postDataApi('auth/register', data).then((response: BaseResponse) => {
+            console.log(response);
+            showMessage(response.message, toastBottomCenter, response.success ? 'success' : 'error');
+            if(response.success){
+                setTimeout(() => {
+                    navigate('/')
+                }, 1500);
+            }
+        })
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

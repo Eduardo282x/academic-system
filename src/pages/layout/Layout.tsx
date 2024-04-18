@@ -13,7 +13,7 @@ export const Layout = () => {
                 <div className="w-48">
                     <Sidebar></Sidebar>
                 </div>
-                <div className="flex items-center justify-center h-full bg-gray-700 w-[calc(100%-12rem)]">
+                <div className="flex items-center justify-center h-full bg-gray-300 w-[calc(100%-12rem)]">
                     {/* <span className="material-icons">home</span>
                 <span className="material-icons-outlined">home</span>
                 <span className="material-icons-round">home</span>

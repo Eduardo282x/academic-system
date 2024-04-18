@@ -7,6 +7,7 @@ export interface UserRegister {
     email: string;
     age: string;
     password: string;
+    rolId: number;
 }
 
 export interface Form {
@@ -75,4 +76,5 @@ export const defaultValues: UserRegister = {
     username: '',
     email: '',
     age: '',
+    rolId: 2
 }
