@@ -5,6 +5,11 @@ export const Sidebar = () => {
     const userType = 'admin';
     const navigate = useNavigate();
 
+    const logout = () => {
+        localStorage.clear()
+        navigate('/');
+    }
+
     const menuFilterFinal: IMenu[] = menu.filter(item => item.rol.includes(userType));
     console.log(menuFilterFinal);
     
@@ -21,7 +26,7 @@ export const Sidebar = () => {
                 ))}
             </div>
 
-            <div className=" bg-red-500 rounded-lg w-full flex items-center justify-start p-2 cursor-pointer hover:bg-red-600 transition-all shadow-2xl">
+            <div onClick={logout} className=" bg-red-500 rounded-lg w-full flex items-center justify-start p-2 cursor-pointer hover:bg-red-600 transition-all shadow-2xl">
                 <span className="material-icons mr-2">logout</span>
                 <p>Cerrar Sesión</p>
             </div>

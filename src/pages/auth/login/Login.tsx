@@ -1,4 +1,4 @@
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputText } from "primereact/inputtext";
 import { Password } from 'primereact/password';
@@ -7,6 +7,8 @@ import { defaultValues, UserKeys, UserLogin, loginValidationSchame } from "./log
 import { Toast } from 'primereact/toast';
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { postDataApi } from "../../../backend/BaseAxios";
+import { BaseResponse, ResponseLogin } from "../../../interfaces/base-response.interface";
 
 export const Login = () => {
     const toastBottomCenter = useRef(null);
@@ -21,18 +23,17 @@ export const Login = () => {
     };
 
     const onSubmit = (data: UserLogin) => {
-        if(data.name == 'admin' && data.password == 'admin'){
-            showMessage('Bienvenido', toastBottomCenter, 'success');
-            setTimeout(() => {
-                navigate('/home');
-            }, 1500);
-        } else {
-            showMessage('Usuario no encontrado', toastBottomCenter, 'error');
-        }
+        postDataApi('/auth/login', data).then((response: ResponseLogin | BaseResponse | any) => {
+            showMessage(response.message, toastBottomCenter, response.success ? 'success' : 'error');
+            if(response.success){
+                localStorage.setItem('token', JSON.stringify(response.userData) )
+                setTimeout(() => {
+                    navigate('/home');
+                }, 1500);
+            }
+        })
     };
 
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const showMessage = (message: string, ref: any, severity: string) => {
         ref.current.clear();
         ref.current.show({ severity: severity, summary: message, detail: message, life: 1500 });

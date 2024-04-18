@@ -9,7 +9,7 @@ export type UserKeys = 'name' | 'password';
 
 export const loginValidationSchame = z.object({
     name: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
-    password: z.string().min(4, {
+    password: z.string().min(3, {
         message:'Es muy corta'
     }),
 })
