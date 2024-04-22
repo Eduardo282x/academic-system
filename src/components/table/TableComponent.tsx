@@ -34,13 +34,7 @@ export const TableComponent: FC<ITable> = ({dataTable, columns}) => {
     };
 
     return (
-        <div className="w-full bg-white flex flex-col items-end justify-center p-8 gap-4 rounded-xl shadow-2xl h-[40rem]">
-            {/* <div className="flex justify-end ">
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText  placeholder="Buscar" onChange={onFilter} className="w-full" />
-                </span>
-            </div> */}
+        <div className="w-full bg-white flex flex-col items-end justify-center p-8 gap-4 rounded-xl shadow-2xl h-full">
 
             <div className="w-[18rem]">
                 <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>

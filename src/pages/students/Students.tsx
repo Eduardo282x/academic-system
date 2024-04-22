@@ -11,7 +11,7 @@ export const Students = () => {
         const rolId = {
             rolId: params
         }
-        await getParamsDataApi('users', rolId ).then((response: IUsers[]) => {
+        await getParamsDataApi('users/students', rolId ).then((response: IUsers[]) => {
             setStudentsData(response)
         })
     }
@@ -30,7 +30,9 @@ export const Students = () => {
         <div>
             Students
             {studentsData.length > 0 && (
-                <TableComponent columns={columnsStudents} dataTable={studentsData}></TableComponent>
+                <div >
+                    <TableComponent columns={columnsStudents} dataTable={studentsData}></TableComponent>
+                </div>
             )}
         </div>
     )

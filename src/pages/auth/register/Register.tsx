@@ -23,7 +23,7 @@ export const Register = () => {
     };
 
     const onSubmit = (data: UserRegister) => {
-        data.rolId = 2;
+        data.rolId = 3;
         console.log(data);
         postDataApi('auth/register', data).then((response: BaseResponse) => {
             console.log(response);
