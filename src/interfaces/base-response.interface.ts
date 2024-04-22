@@ -24,5 +24,5 @@ export interface UserData {
     email:    string;
     age:      string;
     rolId:    number;
-    rolText:  string;
+    roles:  string;
 }

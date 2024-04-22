@@ -15,7 +15,7 @@ export const Sidebar = () => {
 
     useEffect(() => {
         const userData: UserData = JSON.parse(String(localStorage.getItem('token')));
-        const menuCopy: IMenu[]  = menu.filter(item => item.rol.toString().toLowerCase().includes(userData.rolText.toLowerCase()));
+        const menuCopy: IMenu[]  = menu.filter(item => item.rol.toString().toLowerCase().includes(userData.roles.toLowerCase()));
         setMenuFilter(menuCopy)
     },[])
 

@@ -27,7 +27,7 @@ export const menu: IMenu[] = [
         icon: 'cast_for_education',
         redirect: '/cursos',
         color: 'bg-rose-500',
-        rol: ['Estudiante','Profesor']
+        rol: ['Administrador','Estudiante','Profesor']
     },
     {
         title: 'Usuarios',
