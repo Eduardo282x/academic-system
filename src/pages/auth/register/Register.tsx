@@ -1,43 +1,43 @@
-import { useRef } from 'react'
-import { defaultValues, Form, registerForm, RegisterKeys, UserRegister, validationSchema } from './register.data';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { postDataApi } from '../../../backend/BaseAxios';
-import { BaseResponse } from '../../../interfaces/base-response.interface';
+// import { useRef } from 'react'
+// import { defaultValues, Form, registerForm, RegisterKeys, UserRegister, validationSchema } from './register.data';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import { useForm, Controller } from 'react-hook-form';
+// import { useNavigate } from 'react-router-dom';
+// import { postDataApi } from '../../../backend/BaseAxios';
+// import { BaseResponse } from '../../../interfaces/base-response.interface';
 
 export const Register = () => {
-    const toastBottomCenter = useRef(null);
-    const navigate = useNavigate();
+    // const toastBottomCenter = useRef(null);
+    // const navigate = useNavigate();
     
-    const { control, formState: { errors }, handleSubmit } = useForm({ 
-        defaultValues,
-        resolver: zodResolver(validationSchema)
-    });
-    const getFormErrorMessage = (name: string) => {
-        const messageError = errors[name as RegisterKeys]?.message;
-        return errors[name as RegisterKeys] && <small className=" text-red-500 text-[.9rem]">{messageError}</small>
-    };
+    // const { control, formState: { errors }, handleSubmit } = useForm({ 
+    //     defaultValues,
+    //     resolver: zodResolver(validationSchema)
+    // });
+    // const getFormErrorMessage = (name: string) => {
+    //     const messageError = errors[name as RegisterKeys]?.message;
+    //     return errors[name as RegisterKeys] && <small className=" text-red-500 text-[.9rem]">{messageError}</small>
+    // };
 
-    const onSubmit = (data: UserRegister) => {
-        data.rolId = 3;
-        console.log(data);
-        postDataApi('auth/register', data).then((response: BaseResponse) => {
-            console.log(response);
-            showMessage(response.message, toastBottomCenter, response.success ? 'success' : 'error');
-            if(response.success){
-                setTimeout(() => {
-                    navigate('/')
-                }, 1500);
-            }
-        })
-    };
+    // const onSubmit = (data: UserRegister) => {
+    //     data.rolId = 3;
+    //     console.log(data);
+    //     postDataApi('auth/register', data).then((response: BaseResponse) => {
+    //         console.log(response);
+    //         showMessage(response.message, toastBottomCenter, response.success ? 'success' : 'error');
+    //         if(response.success){
+    //             setTimeout(() => {
+    //                 navigate('/')
+    //             }, 1500);
+    //         }
+    //     })
+    // };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const showMessage = (message: string, ref: any, severity: string) => {
-        ref.current.clear();
-        ref.current.show({ severity: severity, summary: message, detail: message, life: 1500 });
-    };
+    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // const showMessage = (message: string, ref: any, severity: string) => {
+    //     ref.current.clear();
+    //     ref.current.show({ severity: severity, summary: message, detail: message, life: 1500 });
+    // };
 
     return (
         <div className='flex flex-col items-center justify-start gap-5 bg-blue-600 rounded-2xl shadow-2xl w-[35rem] max-h-[55rem] overflow-y-auto py-8'>
