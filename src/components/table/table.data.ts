@@ -5,7 +5,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: '#1565c0',
         color: theme.palette.common.white,
-        fontWeight: 'bold'
+        fontWeight: 'semi-bold'
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: '18px', // Tamaño de letra

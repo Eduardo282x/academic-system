@@ -4,6 +4,7 @@ import { IColumns, ITable } from "../../interfaces/table.interface";
 import { InputCustom } from "../inputCustom/InputCustom";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableBody, TableCell, TablePagination, IconButton } from "@mui/material";
 import { Actions, StyledTableCell } from "./table.data";
+// import AddIcon from '@mui/icons-material/Add';
 import './table.css'
 
 export const TableComponent: FC<ITable> = ({ dataTable, columns, title }) => {
@@ -28,8 +29,6 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title }) => {
     };
 
     useEffect(() => {
-
-        console.log(dataTable);
         setDataFilter(dataTable);
     }, []);
 
@@ -52,13 +51,20 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title }) => {
     };
 
     return (
-        <div className="w-[80rem] bg-white flex flex-col items-center justify-center p-8 gap-4 rounded-xl shadow-2xl h-full">
+        <div className="w-full bg-white flex flex-col items-center justify-center p-8 gap-4 rounded-xl shadow-2xl h-full">
             <div className="flex items-center justify-between w-full">
                 <div className=" text-black text-2xl">
                     {title}
                 </div>
-                <div className="w-[18rem]">
-                    <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>
+                <div className="flex items-center justify-center h-full gap-2">
+
+                    <div className="w-[18rem]">
+                        <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>
+                    </div>
+
+                    <button className="rounded-full bg-[#1565c0] hover:bg-[#1e68f1] text-white transition-all flex items-center justify-center p-2">
+                        <span className={`material-icons-round`}>add</span>
+                    </button>
                 </div>
             </div>
 
@@ -80,12 +86,11 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title }) => {
                                         {columns.map((ro: IColumns, key: number) => (
                                             <TableCell
                                                 key={key}
+                                                sx={{width: ro.width}}
                                             // sx={{ width: ro.width ? ro.width : 100 }}
                                             >
                                                 {ro.type == "text" ? row[ro.column] : ""}
                                                 {ro.type == "date" ? row[ro.column] : ""}
-                                                {/* {ro.type == "time" ? ParseTimeString(row[ro.column]) : ""} */}
-                                                {/* {ro.type == "date" ? parseDate(row[ro.column]) : ""}  */}
                                                 {ro.type == "icon" && (
                                                     <IconButton
                                                         className={`editBtn  `}

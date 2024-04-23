@@ -23,6 +23,13 @@ export const menu: IMenu[] = [
         rol: ['Administrador','Estudiante','Profesor']
     },
     {
+        title: 'Salones',
+        icon: 'school',
+        redirect: '/salones',
+        color: 'bg-rose-500',
+        rol: ['Administrador']
+    },
+    {
         title: 'Materias',
         icon: 'cast_for_education',
         redirect: '/cursos',
@@ -30,7 +37,7 @@ export const menu: IMenu[] = [
         rol: ['Administrador','Estudiante','Profesor']
     },
     {
-        title: 'Usuarios',
+        title: 'Profesores',
         icon: 'group',
         redirect: '/usuarios',
         color: 'bg-teal-500',

@@ -10,6 +10,7 @@ export interface IColumns {
     column: string;
     type: string;
     icon?: string;
+    width?: string;
     color?: string;
     action?: string;
     filterOption: boolean;

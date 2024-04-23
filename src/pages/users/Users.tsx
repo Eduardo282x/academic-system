@@ -15,17 +15,12 @@ export const Users = () => {
 
     useEffect(() => {
         getStudents();
-        
-        setTimeout(() => {
-            console.log(usersData);
-        }, 1500);
     },[])
 
     return (
-        <div>
-            Usuarios
+        <div className="cardDisplayComponent">
             {usersData.length > 0 && (
-                <TableComponent columns={columnsUsers} dataTable={usersData}></TableComponent>
+                <TableComponent title="Usuarios" columns={columnsUsers} dataTable={usersData}></TableComponent>
             )}
         </div>
     )

@@ -24,7 +24,7 @@ export const Students = () => {
     },[])
 
     return (
-        <div>
+        <div className="cardDisplayComponent">
             {studentsData.length > 0 && (
                 <div >
                     <TableComponent title="Estudiantes" columns={columnsStudents} dataTable={studentsData}></TableComponent>

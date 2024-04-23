@@ -6,9 +6,10 @@ import { Register } from './pages/auth/register/Register';
 import { Home } from './pages/home/Home';
 import { Layout } from './pages/layout/Layout';
 import 'material-icons/iconfont/material-icons.css';
-import { Courses } from './pages/courses/Courses';
 import { Users } from './pages/users/Users';
 import { Students } from './pages/students/Students';
+import { Classrooms } from './pages/classrooms/Classrooms';
+import { Subjects } from './pages/subjects/Subjects';
 
 
 const router = createBrowserRouter([
@@ -28,8 +29,12 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
+        path: '/salones',
+        element: <Classrooms></Classrooms>
+      },
+      {
         path: '/cursos',
-        element: <Courses></Courses>
+        element: <Subjects></Subjects>
       },
       {
         path: '/usuarios',
