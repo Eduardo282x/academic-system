@@ -53,7 +53,7 @@ export const Login = () => {
 
             <div className="imgWave rounded-2xl w-full h-full flex items-center md:justify-end justify-center py-8">
                 <div className="md:w-[42%] w-full">
-                    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex items-center justify-center flex-col px-4">
+                    <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col items-center justify-center gap-5">
                         <h1 className='text-[2rem] font-bold text-white'>Jorge Washington</h1>
                         <div className="mx-4 my-4 flex flex-col w-full">
                             <label className=' text-white ml-1'>Nombre de usuario</label>

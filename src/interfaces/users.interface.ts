@@ -1,10 +1,11 @@
 export interface IUsers {
-    id:       number;
+    id?:       number;
     name:     string;
     lastname: string;
     username: string;
     email:    string;
     age:      string;
-    rolId:    number;
-    rolText:  string;
+    rolId?:    number;
+    rolText?:  string;
+    classrooms?:  number;
 }

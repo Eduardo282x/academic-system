@@ -1,22 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC, useEffect, useState } from "react";
-import { IColumns, ITable } from "../../interfaces/table.interface";
+import { IColumns, ITable, TableReturn } from "../../interfaces/table.interface";
 import { InputCustom } from "../inputCustom/InputCustom";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableBody, TableCell, TablePagination, IconButton } from "@mui/material";
 import { Actions, StyledTableCell } from "./table.data";
 // import AddIcon from '@mui/icons-material/Add';
 import './table.css'
 
-export const TableComponent: FC<ITable> = ({ dataTable, columns, title }) => {
+export const TableComponent: FC<ITable> = ({ dataTable, columns, title, openForm }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [dataFilter, setDataFilter] = useState<any[]>(dataTable);
     // const [selectedProducts, setSelectedProducts] = useState(null);
 
-    const sendData = (data: any, action: string) => {
-        console.log(data);
-        console.log(action);
-
+    const sendData = (data: object | null, action: string) => {
+        const dataForm: TableReturn = {
+            action: action,
+            data: data
+        }
+        openForm(dataForm)
     }
 
     const handleChangePage = (event: unknown, newPage: number) => {
@@ -62,7 +64,7 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title }) => {
                         <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>
                     </div>
 
-                    <button className="rounded-full bg-blue-500 hover:bg-[#1e68f1] text-white transition-all flex items-center justify-center p-2">
+                    <button onClick={() => sendData(null, 'add')} className="rounded-full bg-blue-500 hover:bg-[#1e68f1] text-white transition-all flex items-center justify-center p-2">
                         <span className={`material-icons-round`}>add</span>
                     </button>
                 </div>

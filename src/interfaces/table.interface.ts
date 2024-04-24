@@ -3,6 +3,12 @@ export interface ITable{
     title: string;
     dataTable: any[];
     columns: IColumns[];
+    openForm: (open: TableReturn) => void;
+}
+
+export interface TableReturn {
+    action: string;
+    data: any;
 }
 
 export interface IColumns {

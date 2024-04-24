@@ -8,10 +8,10 @@ export const Sidebar = () => {
     const [menuFilter, setMenuFilter] = useState<IMenu[]>([]);
     const navigate = useNavigate();
 
-    const logout = () => {
-        localStorage.clear()
-        navigate('/');
-    }
+    // const logout = () => {
+    //     localStorage.clear()
+    //     navigate('/');
+    // }
 
     useEffect(() => {
         const userData: UserData = JSON.parse(String(localStorage.getItem('token')));
