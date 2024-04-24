@@ -62,7 +62,7 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title }) => {
                         <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>
                     </div>
 
-                    <button className="rounded-full bg-[#1565c0] hover:bg-[#1e68f1] text-white transition-all flex items-center justify-center p-2">
+                    <button className="rounded-full bg-blue-500 hover:bg-[#1e68f1] text-white transition-all flex items-center justify-center p-2">
                         <span className={`material-icons-round`}>add</span>
                     </button>
                 </div>

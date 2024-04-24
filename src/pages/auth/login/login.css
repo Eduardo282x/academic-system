@@ -1,8 +1,17 @@
 .imgBackground{
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
-    background-image: url('https://static.guiainfantil.com/pictures/articulos2/43000/43807-como-hacer-que-los-ninos-permanezcan-sentados-en-clase.jpg');
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../assets/img/studentsBackgrounds.png');
+}
+
+@media (max-width: 768px) {
+
+    .imgBackground{
+        background-image: url('../../../assets/img/mobile.jpg');
+    }
 }
 
 .imgWave{
@@ -10,7 +19,6 @@
     background-repeat: no-repeat;
     /* background-position: 250px; */
     height: 100%;
-    background-image: url('../../../assets/img/WaveLogin.png');
 }
 
 .imgBackground p{

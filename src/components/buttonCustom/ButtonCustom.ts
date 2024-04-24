@@ -4,12 +4,12 @@ import { orange } from '@mui/material/colors';
 
 export const ColorButton = styled(Button)<ButtonProps>(() => ({
     color: orange[50],
-    backgroundColor: orange[600],
+    backgroundColor: orange[500],
     padding: '1rem',
     borderRadius: '.375rem',
     fontSize: '1rem',
     textTransform: 'none',
     '&:hover': {
-        backgroundColor: orange[800],
+        backgroundColor: orange[700],
     },
 }));

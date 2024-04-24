@@ -16,6 +16,13 @@ interface ItemsMenu {
 
 export const menu: IMenu[] = [
     {
+        title: 'Usuario',
+        icon: 'account_circle',
+        redirect: '/home',
+        color: 'bg-violet-500',
+        rol: ['Administrador','Estudiante','Profesor']
+    },
+    {
         title: 'Inicio',
         icon: 'home',
         redirect: '/home',

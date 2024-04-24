@@ -1,0 +1,12 @@
+.sideBar:hover .titleHidden{
+    display: block;
+}
+
+.titleHidden{
+    display: none;
+}
+
+
+.animationDisplay{
+    transition: .5s;
+}

@@ -49,19 +49,19 @@ export const Login = () => {
     };
 
     return (
-        <div className='flex items-center imgBackground  imgWave justify-end rounded-2xl shadow-2xl w-[50rem] h-[80vh]'>
+        <div className='flex items-center imgBackground justify-end rounded-2xl shadow-2xl'>
 
-            <div className="imgWave rounded-2xl w-full h-full flex items-center justify-end py-8">
-                <div className="w-[50%]">
+            <div className="imgWave rounded-2xl w-full h-full flex items-center md:justify-end justify-center py-8">
+                <div className="md:w-[42%] w-full">
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex items-center justify-center flex-col px-4">
-                        <h1 className='text-2xl font-bold text-blue-600'>Jorge Washington</h1>
+                        <h1 className='text-[2rem] font-bold text-white'>Jorge Washington</h1>
                         <div className="mx-4 my-4 flex flex-col w-full">
                             <label className=' text-white ml-1'>Nombre de usuario</label>
-                            <input type="text" className="bg-gray-200 rounded-md w-full h-12 px-2 text-black outline-none"  {...register('username')} />
+                            <input type="text" className="bg-gray-100 rounded-md w-full h-12 px-2 text-black outline-none"  {...register('username')} />
                         </div>
                         <div className="mx-4 my-4 flex flex-col w-full">
                             <label className=' text-white ml-1'>Contraseña</label>
-                            <div className="flex items-center justify-between bg-gray-200 rounded-md px-2">
+                            <div className="flex items-center justify-between bg-gray-100 rounded-md px-2">
                                 <input type={showPassword ? 'text' : 'password'} className=" bg-transparent w-[80%] h-12 text-black outline-none"  {...register('password')} />
                                 <span className="material-icons-outlined cursor-pointer text-black mx-2" onClick={() => setShowPassword((show) => !show)}>{showPassword ? 'visibility' : 'visibility_off'}</span>
                             </div>
