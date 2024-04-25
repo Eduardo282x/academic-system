@@ -8,11 +8,6 @@ export const Sidebar = () => {
     const [menuFilter, setMenuFilter] = useState<IMenu[]>([]);
     const navigate = useNavigate();
 
-    // const logout = () => {
-    //     localStorage.clear()
-    //     navigate('/');
-    // }
-
     useEffect(() => {
         const userData: UserData = JSON.parse(String(localStorage.getItem('token')));
         const menuCopy: IMenu[]  = menu.filter(item => item.rol.toString().toLowerCase().includes(userData.roles.toLowerCase()));
@@ -22,6 +17,7 @@ export const Sidebar = () => {
     return (
         <div className={`h-full w-full flex flex-col items-start justify-between py-6 px-2 ${baseColor} text-white sideBar`}>
             <div className="w-full gap-5 flex flex-col items-start justify-start">
+                <div className="imgSchoolSidebar"></div>
                 {menuFilter.map((opt: IMenu) => (
                     <div key={opt.title} onClick={() => navigate(opt.redirect)} className=" bg-orange-400 rounded-lg w-full flex items-center justify-start p-2 cursor-pointer hover:bg-orange-500 transition-all shadow-2xl">
                         <span className="material-icons mr-2">{opt.icon}</span>
@@ -29,11 +25,6 @@ export const Sidebar = () => {
                     </div>
                 ))}
             </div>
-
-            {/* <div onClick={logout} className=" bg-red-500 rounded-lg w-full flex items-center justify-start p-2 cursor-pointer hover:bg-red-600 transition-all shadow-2xl">
-                <span className="material-icons mr-2">logout</span>
-                <p className="titleHidden">Cerrar Sesión</p>
-            </div> */}
         </div>
     )
 }

@@ -5,19 +5,13 @@ import { FC } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TableReturn } from '../../interfaces/table.interface';
 import { ColorButton } from '../buttonCustom/ButtonCustom';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+// import MenuItem from '@mui/material/MenuItem';
+// import Select from '@mui/material/Select';
 import './form.css'
 
-const optionStyles = {
-    cursor: 'pointer',
-    margin: '5px',
-    padding: '10px',
-    // Otros estilos que desees aplicar
-};
+type Keys = 'classroomId';
 
-
-export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, validationSchema, action, onSubmitForm }) => {
+export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWordId, validationSchema, action, onSubmitForm }) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<any>({
         defaultValues,
@@ -26,6 +20,7 @@ export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, valid
 
     const onSubmit = (returnForm: any) => {
         console.log(returnForm);
+        returnForm[keyWordId] = defaultValues[keyWordId as Keys];
         const formData: TableReturn = {
             action: action,
             data: returnForm
@@ -61,20 +56,20 @@ export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, valid
                         <div key={index} className="w-full my-3 gap-5">
                             <label className=' text-black ml-2'>{form.label}</label>
                             <select
+                                // value={defaultValues[form.name]}
                                 {...register(form.name)}
-                                className={`bg-gray-100 rounded-md w-full h-12 px-2 text-black outline-none border-2 border-solid ${errors[form.name]?.message ? 'border-red-500' : 'border-blue-200'} focus:border-blue-500`}  >
+                                className={`bg-gray-100 rounded-md w-full h-12 px-2 text-black outline-none border-2 border-solid ${errors[form.name]?.message ? 'border-red-500' : 'border-blue-200'} focus:border-blue-500 selectOption`}  >
                                 {form.options?.map((opt: IOptions) => (
-                                    <option key={opt.value} value={opt.value} style={optionStyles}>{opt.label}</option>
+                                    <option key={opt.value} value={opt.value}>{opt.label}</option>
                                 ))}
                             </select>
 
                             {/* <Select
-                            value={2}
                             {...register(form.name)}
                             className={`bg-gray-100 rounded-md w-full h-12 px-2 text-black outline-none border-2 border-solid ${errors[form.name]?.message ? 'border-red-500' : 'border-blue-200'} focus:border-blue-500`}
                             >
                                 {form.options?.map((opt: IOptions) => (
-                                    <MenuItem key={opt.value} value={opt.value} style={optionStyles}>{opt.label}</MenuItem>
+                                    <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
                                 ))}
                             </Select> */}
                             {errors[form.name]?.message && <p className='text-red-500 text-sm ml-2'>{errors[form.name]?.message}</p>}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getDataApi } from "../../backend/BaseAxios"
 import { IUsers } from "../../interfaces/users.interface";
 import { TableComponent } from "../../components/table/TableComponent";
-import { bodyStudents, columnsStudents, dataForm, validationStudents } from "./students.data";
+import { body, columnsStudents, dataForm, validationStudents } from "./students.data";
 import { TableReturn } from "../../interfaces/table.interface";
 import Dialog from '@mui/material/Dialog';
 import { FormComponent } from "../../components/form/FormComponent";
@@ -12,6 +12,9 @@ import { IClassrooms } from "../../interfaces/classrooms.interface";
 export const Students = () => {
     const [studentsData, setStudentsData] = useState<IUsers[]>([]);
     const [dataFormStudents, setDataFormStudents] = useState<IDataForm[]>(dataForm);
+    const [bodyStudents, setBodyStudents] = useState<IUsers>(body);
+    const [title, setTitle] = useState<string>('Agregar');
+    const [action, setAction] = useState<string>('addApi');
     const [open, setOpen] = useState<boolean>(false);
 
     const handleClickOpen = () => {
@@ -50,6 +53,18 @@ export const Students = () => {
         const { data, action } = tableReturn;
         console.log(data);
         console.log(action);
+
+        setBodyStudents(action === 'edit' ? data : body)
+        setTitle(action === 'edit' ? 'Actualizar' : 'Agregar');
+        setAction(action === 'edit' ? 'editApi' : 'addApi');
+        handleClickOpen()
+
+        console.log(action);
+        
+        if(action == 'editApi' || action =='addApi'){
+            handleClose()
+        }
+
         handleClickOpen()
     }
 
@@ -72,7 +87,7 @@ export const Students = () => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <FormComponent title="Agregar" action="addNew" dataForm={dataFormStudents} defaultValues={bodyStudents} validationSchema={validationStudents} onSubmitForm={openDialog}></FormComponent>
+                <FormComponent title={title} action={action} dataForm={dataFormStudents} defaultValues={bodyStudents} validationSchema={validationStudents} onSubmitForm={openDialog}></FormComponent>
             </Dialog>
         </div>
     )

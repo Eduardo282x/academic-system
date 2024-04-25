@@ -55,7 +55,7 @@ export const columnsStudents: IColumns[] = [
 ];
 
 
-export const bodyStudents: IUsers = {
+export const body: IUsers = {
     name: '',
     lastname: '',
     username: '',

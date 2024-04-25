@@ -32,7 +32,7 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title, openForm
 
     useEffect(() => {
         setDataFilter(dataTable);
-    }, []);
+    }, [dataTable]);
 
     const onFilter = (inputValue: string) => {
 

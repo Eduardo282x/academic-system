@@ -25,3 +25,19 @@ export const postDataApi = async (endpoint: string, data: any): Promise<Response
         return err.response.data;
     })
 }
+
+export const putDataApi = async (endpoint: string, data: any): Promise<ResponseLogin | BaseResponse> => {
+    return await axios.put(endpoint, data).then((response) => {
+        return response.data;
+    }).catch((err) => {
+        return err.response.data;
+    })
+}
+
+export const deleteDataApi = async (endpoint: string, data: number): Promise<ResponseLogin | BaseResponse> => {
+    return await axios.delete(`${endpoint}/${data}`).then((response) => {
+        return response.data;
+    }).catch((err) => {
+        return err.response.data;
+    })
+}

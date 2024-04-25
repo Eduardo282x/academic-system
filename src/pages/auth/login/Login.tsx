@@ -53,13 +53,14 @@ export const Login = () => {
 
             <div className="imgWave rounded-2xl w-full h-full flex items-center md:justify-end justify-center py-8">
                 <div className="md:w-[42%] w-full">
-                    <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col items-center justify-center gap-5">
-                        <h1 className='text-[2rem] font-bold text-white'>Jorge Washington</h1>
-                        <div className="mx-4 my-4 flex flex-col w-full">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center gap-5">
+                        {/* <h1 className='text-[2rem] font-bold text-white'>Jorge Washington</h1> */}
+                        <div className="imgSchool"></div>
+                        <div className="m-4 flex flex-col md:w-full w-[90%]">
                             <label className=' text-white ml-1'>Nombre de usuario</label>
                             <input type="text" className="bg-gray-100 rounded-md w-full h-12 px-2 text-black outline-none"  {...register('username')} />
                         </div>
-                        <div className="mx-4 my-4 flex flex-col w-full">
+                        <div className="m-4 flex flex-col md:w-full w-[90%]">
                             <label className=' text-white ml-1'>Contraseña</label>
                             <div className="flex items-center justify-between bg-gray-100 rounded-md px-2">
                                 <input type={showPassword ? 'text' : 'password'} className=" bg-transparent w-[80%] h-12 text-black outline-none"  {...register('password')} />
