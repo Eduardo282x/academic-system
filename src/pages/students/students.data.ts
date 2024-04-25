@@ -56,12 +56,13 @@ export const columnsStudents: IColumns[] = [
 
 
 export const body: IUsers = {
+    userId: 0,
     name: '',
     lastname: '',
     username: '',
     email: '',
     age: '',
-    classrooms: 0,
+    classroomId: 0,
 }
 
 export const validationStudents: object = z.object({
@@ -70,7 +71,7 @@ export const validationStudents: object = z.object({
     username: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
     email: z.string().email({message:'Debe ingresar un correo electronico valido'}),
     age: z.number().max(100, {message: 'La edad no puede ser mayor a 100'}),
-    classrooms: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
+    classroomId: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
 })
 
 export const dataForm: IDataForm[] = [
@@ -108,7 +109,7 @@ export const dataForm: IDataForm[] = [
         label: 'Salón',
         value: '',
         type: 'select',
-        name: 'classrooms',
+        name: 'classroomId',
     },
 ]
 

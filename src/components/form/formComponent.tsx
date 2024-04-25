@@ -25,6 +25,8 @@ export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWo
             action: action,
             data: returnForm
         }
+        console.log(formData);
+        
         onSubmitForm(formData)
     }
 

@@ -1,5 +1,6 @@
 export interface IUsers {
     id?:       number;
+    userId?:       number;
     name:     string;
     lastname: string;
     username: string;
@@ -8,4 +9,5 @@ export interface IUsers {
     rolId?:    number;
     rolText?:  string;
     classrooms?:  number;
+    classroomId ?:  number;
 }

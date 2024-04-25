@@ -5,9 +5,10 @@ import { TableComponent } from "../../components/table/TableComponent";
 import { body, columnsStudents, dataForm, validationStudents } from "./students.data";
 import { TableReturn } from "../../interfaces/table.interface";
 import Dialog from '@mui/material/Dialog';
-import { FormComponent } from "../../components/form/FormComponent";
 import { IDataForm, IOptions } from "../../interfaces/form.interface";
 import { IClassrooms } from "../../interfaces/classrooms.interface";
+import { BaseApiReturn, BaseApi } from "../../backend/BaseAPI";
+import { FormComponent } from "../../components/form/FormComponent";
 
 export const Students = () => {
     const [studentsData, setStudentsData] = useState<IUsers[]>([]);
@@ -33,7 +34,7 @@ export const Students = () => {
 
     const getClassrooms = async () => {
         const copyDataForm: IDataForm[] = dataForm;
-        const findClassroomsForm = copyDataForm.find(form => form.name == 'classrooms');
+        const findClassroomsForm = copyDataForm.find(form => form.name == 'classroomId');
         await getDataApi('classrooms').then((response: IClassrooms[]) => {
             if(findClassroomsForm){
                 findClassroomsForm.options = response.map(classrooms => {
@@ -49,23 +50,29 @@ export const Students = () => {
         })
     }
 
-    const openDialog = (tableReturn: TableReturn) => {
+    const openDialog = async (tableReturn: TableReturn) => {
         const { data, action } = tableReturn;
-        console.log(data);
-        console.log(action);
-
-        setBodyStudents(action === 'edit' ? data : body)
-        setTitle(action === 'edit' ? 'Actualizar' : 'Agregar');
-        setAction(action === 'edit' ? 'editApi' : 'addApi');
-        handleClickOpen()
-
-        console.log(action);
+        console.log('get data:', data);
         
-        if(action == 'editApi' || action =='addApi'){
+        const responseBaseApi: BaseApiReturn = await BaseApi(action,data,body,'userId','users/students');
+        if(responseBaseApi.open){
+            handleClickOpen()
+        }
+        if(responseBaseApi.close){
             handleClose()
         }
+        
+        setBodyStudents(responseBaseApi.body as IUsers)
+        setTitle(responseBaseApi.title);
+        setAction(responseBaseApi.action);
 
-        handleClickOpen()
+        setTimeout(() => {
+            console.log(bodyStudents);
+        }, 1500);
+
+        if(responseBaseApi){  
+            getStudents()
+        }
     }
 
     useEffect(() => {
@@ -87,7 +94,7 @@ export const Students = () => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <FormComponent title={title} action={action} dataForm={dataFormStudents} defaultValues={bodyStudents} validationSchema={validationStudents} onSubmitForm={openDialog}></FormComponent>
+                <FormComponent title={title} action={action} dataForm={dataFormStudents} defaultValues={bodyStudents} validationSchema={validationStudents} onSubmitForm={openDialog} keyWordId={"userId"}></FormComponent>
             </Dialog>
         </div>
     )
