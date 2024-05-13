@@ -4,7 +4,7 @@ import { TableComponent } from '../../components/table/TableComponent';
 import { body, columnsClassrooms, dataForm, validationClassrooms } from './classrooms.data';
 import { IClassrooms } from '../../interfaces/classrooms.interface';
 import { TableReturn } from '../../interfaces/table.interface';
-import { FormComponent } from '../../components/form/FormComponent';
+import { FormComponent } from '../../components/form/formComponent';
 import { Dialog } from '@mui/material';
 // import { BaseResponse } from '../../interfaces/base-response.interface';
 import { BaseApi, BaseApiReturn } from '../../backend/BaseAPI';

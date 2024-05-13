@@ -8,7 +8,7 @@ import Dialog from '@mui/material/Dialog';
 import { IDataForm, IOptions } from "../../interfaces/form.interface";
 import { IClassrooms } from "../../interfaces/classrooms.interface";
 import { BaseApiReturn, BaseApi } from "../../backend/BaseAPI";
-import { FormComponent } from "../../components/form/FormComponent";
+import { FormComponent } from "../../components/form/formComponent";
 
 export const Students = () => {
     const [studentsData, setStudentsData] = useState<IUsers[]>([]);
