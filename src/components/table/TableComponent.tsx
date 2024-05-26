@@ -7,7 +7,7 @@ import { Actions, StyledTableCell } from "./table.data";
 // import AddIcon from '@mui/icons-material/Add';
 import './table.css'
 
-export const TableComponent: FC<ITable> = ({ dataTable, columns, title, openForm }) => {
+export const TableComponent: FC<ITable> = ({ dataTable, columns, title, configTable, openForm }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [dataFilter, setDataFilter] = useState<any[]>(dataTable);
@@ -59,14 +59,17 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title, openForm
                     {title}
                 </div>
                 <div className="flex items-center justify-center h-full gap-2">
+                    {configTable.searchInput &&
+                        <div className="w-[18rem]">
+                            <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>
+                        </div>
+                    }
 
-                    <div className="w-[18rem]">
-                        <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>
-                    </div>
-
-                    <button onClick={() => sendData(null, 'add')} className="rounded-full bg-blue-500 hover:bg-[#1e68f1] text-white transition-all flex items-center justify-center p-2">
-                        <span className={`material-icons-round`}>add</span>
-                    </button>
+                    {configTable.addBtn &&
+                        <button onClick={() => sendData(null, 'add')} className="rounded-full bg-blue-500 hover:bg-[#1e68f1] text-white transition-all flex items-center justify-center p-2">
+                            <span className={`material-icons-round`}>add</span>
+                        </button>
+                    }
                 </div>
             </div>
 
@@ -88,7 +91,7 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title, openForm
                                         {columns.map((ro: IColumns, key: number) => (
                                             <TableCell
                                                 key={key}
-                                                sx={{width: ro.width}}
+                                                sx={{ width: ro.width }}
                                             // sx={{ width: ro.width ? ro.width : 100 }}
                                             >
                                                 {ro.type == "text" ? row[ro.column] : ""}

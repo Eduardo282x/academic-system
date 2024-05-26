@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { IClassrooms } from "../../interfaces/classrooms.interface";
-import { IColumns } from "../../interfaces/table.interface";
+import { IColumns, ConfigTable } from "../../interfaces/table.interface";
 import { IDataForm } from "../../interfaces/form.interface";
 
 export const columnsClassrooms: IColumns[] = [
@@ -10,25 +10,25 @@ export const columnsClassrooms: IColumns[] = [
         width: '80%',
         type: 'text',
         filterOption: true
-    },
-    {
-        header: 'Editar',
-        column: 'edit',
-        type: 'icon',
-        action: 'edit',
-        color: 'text-blue-500',
-        icon: 'edit',
-        filterOption: false
-    },
-    {
-        header: 'Eliminar',
-        column: 'delete',
-        type: 'icon',
-        action: 'delete',
-        color: 'text-red-500',
-        icon: 'delete',
-        filterOption: false
     }
+    // {
+    //     header: 'Editar',
+    //     column: 'edit',
+    //     type: 'icon',
+    //     action: 'edit',
+    //     color: 'text-blue-500',
+    //     icon: 'edit',
+    //     filterOption: false
+    // },
+    // {
+    //     header: 'Eliminar',
+    //     column: 'delete',
+    //     type: 'icon',
+    //     action: 'delete',
+    //     color: 'text-red-500',
+    //     icon: 'delete',
+    //     filterOption: false
+    // }
 ];
 
 export const body: IClassrooms = {
@@ -48,4 +48,9 @@ export const dataForm: IDataForm[] = [
         name: 'grade',
     },
 ]
+
+export const configTableClassrooms: ConfigTable = {
+    addBtn: false,
+    searchInput: false
+}
 

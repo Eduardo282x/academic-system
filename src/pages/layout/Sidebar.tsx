@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { menu, IMenu } from "./menu.data"
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { UserData } from "../../interfaces/base-response.interface";
 import { baseColor } from "../../styles";
 import './sidebar.css'
-export const Sidebar = () => {
+
+interface ISidebar {
+    widthMobile: boolean;
+}
+
+export const Sidebar: FC<ISidebar> = ({widthMobile}) => {
+
     const [menuFilter, setMenuFilter] = useState<IMenu[]>([]);
     const navigate = useNavigate();
 
@@ -15,7 +21,7 @@ export const Sidebar = () => {
     },[])
 
     return (
-        <div className={`h-full w-full flex flex-col items-start justify-between py-6 px-2 ${baseColor} text-white sideBar`}>
+        <div className={`h-full md:w-full w-[12rem] md:text-base text-xl flex flex-col items-start justify-between py-6 px-2 ${baseColor} text-white ${widthMobile ? 'sideBarMobile' : 'sideBar'} `}>
             <div className="w-full gap-5 flex flex-col items-start justify-start">
                 <div className="imgSchoolSidebar"></div>
                 {menuFilter.map((opt: IMenu) => (

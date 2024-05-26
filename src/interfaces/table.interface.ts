@@ -3,7 +3,13 @@ export interface ITable{
     title: string;
     dataTable: any[];
     columns: IColumns[];
+    configTable: ConfigTable;
     openForm: (open: TableReturn) => void;
+}
+
+export interface ConfigTable {
+    searchInput: boolean;
+    addBtn: boolean;
 }
 
 export interface TableReturn {

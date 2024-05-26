@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { IDataForm } from "../../interfaces/form.interface";
-import { IColumns } from "../../interfaces/table.interface";
+import { ConfigTable, IColumns } from "../../interfaces/table.interface";
 import { IUsers } from "../../interfaces/users.interface";
+import { IDataForm } from "../../interfaces/form.interface";
 
-export const columnsStudents: IColumns[] = [
+export const columnsUsers: IColumns[] = [
     {
         header: 'Nombre',
         column: 'name',
@@ -29,12 +29,6 @@ export const columnsStudents: IColumns[] = [
         filterOption: true
     },
     {
-        header: 'Salon',
-        column: 'classrooms',
-        type: 'text',
-        filterOption: true
-    },
-    {
         header: 'Editar',
         column: 'edit',
         type: 'icon',
@@ -54,24 +48,20 @@ export const columnsStudents: IColumns[] = [
     }
 ];
 
-
 export const body: IUsers = {
-    userId: 0,
     name: '',
     lastname: '',
     username: '',
     email: '',
     age: '',
-    classroomId: 0,
 }
 
-export const validationStudents: object = z.object({
+export const validationUsers: object = z.object({
     name: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
     lastname: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
     username: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
-    email: z.string().email({message:'Debe ingresar un correo electronico valido'}),
+    email: z.string().email({message: 'El correo es requerido'}),
     age: z.number().max(100, {message: 'La edad no puede ser mayor a 100'}),
-    classroomId: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
 })
 
 export const dataForm: IDataForm[] = [
@@ -104,12 +94,11 @@ export const dataForm: IDataForm[] = [
         value: '',
         type: 'number',
         name: 'age',
-    },
-    {
-        label: 'Salón',
-        value: '',
-        type: 'select',
-        name: 'classroomId',
-    },
+    }
 ]
 
+
+export const configTableUsers: ConfigTable = {
+    addBtn: true,
+    searchInput: true
+}

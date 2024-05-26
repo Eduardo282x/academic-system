@@ -2,6 +2,10 @@
     display: block;
 }
 
+.sideBarMobile .titleHidden{
+    display: block;
+}
+
 .titleHidden,.imgSchoolSidebar{
     display: none;
 }

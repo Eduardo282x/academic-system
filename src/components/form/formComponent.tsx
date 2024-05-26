@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm } from 'react-hook-form';
+import { useForm, useFormState } from 'react-hook-form';
 import { IDataForm, IForm, IOptions } from '../../interfaces/form.interface'
 import { FC } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,22 +9,25 @@ import { ColorButton } from '../buttonCustom/ButtonCustom';
 // import Select from '@mui/material/Select';
 import './form.css'
 
-type Keys = 'classroomId';
+type Keys = 'classroomId' | 'userId' | 'id';
 
 export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWordId, validationSchema, action, onSubmitForm }) => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<any>({
+    const { register, control, handleSubmit, formState: { errors } } = useForm<any>({
         defaultValues,
-        resolver: zodResolver(validationSchema)
+        resolver: zodResolver(validationSchema),
+        mode: 'onChange'
     });
 
+    const {isValid} = useFormState({control});
+
     const onSubmit = (returnForm: any) => {
-        console.log(returnForm);
         returnForm[keyWordId] = defaultValues[keyWordId as Keys];
         const formData: TableReturn = {
             action: action,
             data: returnForm
         }
+
         console.log(formData);
         
         onSubmitForm(formData)
@@ -80,7 +83,7 @@ export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWo
                 ))}
 
                 <div className="flex flex-col items-center justify-center ">
-                    <ColorButton variant="contained" type='submit' >Enviar</ColorButton>
+                    <ColorButton variant="contained" type='submit' disabled={!isValid}>Enviar</ColorButton>
                 </div>
             </form>
         </div>

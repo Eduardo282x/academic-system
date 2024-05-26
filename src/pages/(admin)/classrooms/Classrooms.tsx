@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
-import { getDataApi} from '../../backend/BaseAxios';
-import { TableComponent } from '../../components/table/TableComponent';
-import { body, columnsClassrooms, dataForm, validationClassrooms } from './classrooms.data';
-import { IClassrooms } from '../../interfaces/classrooms.interface';
-import { TableReturn } from '../../interfaces/table.interface';
-import { FormComponent } from '../../components/form/formComponent';
+import { getDataApi} from '../../../backend/BaseAxios';
+import { TableComponent } from '../../../components/table/TableComponent';
+import { body, columnsClassrooms, configTableClassrooms, dataForm, validationClassrooms } from './classrooms.data';
+import { IClassrooms } from '../../../interfaces/classrooms.interface';
+import { TableReturn } from '../../../interfaces/table.interface';
+import { FormComponent } from '../../../components/form/formComponent';
 import { Dialog } from '@mui/material';
-// import { BaseResponse } from '../../interfaces/base-response.interface';
-import { BaseApi, BaseApiReturn } from '../../backend/BaseAPI';
-// import { IDataForm } from '../../interfaces/form.interface';
+import { BaseApi, BaseApiReturn } from '../../../backend/BaseAPI';
 
 export const Classrooms = () => {
     const [classrooms, setClassrooms] = useState<IClassrooms[]>([]);
@@ -51,7 +49,7 @@ export const Classrooms = () => {
     return (
         <div className="cardDisplayComponent">
             {classrooms.length > 0 && (
-                <TableComponent title="Salones" columns={columnsClassrooms} dataTable={classrooms} openForm={openDialog}></TableComponent>
+                <TableComponent title="Salones" columns={columnsClassrooms} configTable={configTableClassrooms} dataTable={classrooms} openForm={openDialog}></TableComponent>
             )}
 
             <Dialog

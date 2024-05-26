@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
 
 import { Login } from './pages/auth/login/Login';
@@ -6,52 +6,41 @@ import { Login } from './pages/auth/login/Login';
 import { Home } from './pages/home/Home';
 import { Layout } from './pages/layout/Layout';
 import 'material-icons/iconfont/material-icons.css';
-import { Users } from './pages/users/Users';
-import { Students } from './pages/students/Students';
-import { Classrooms } from './pages/classrooms/Classrooms';
+import { Users } from './pages/(admin)/users/Users';
+import { Classrooms } from './pages/(admin)/classrooms/Classrooms';
+import { SubjectsAdmin } from './pages/(admin)/subjects/SubjectsAdmin';
+import { Students } from './pages/(admin)/students/Students';
 import { Subjects } from './pages/subjects/Subjects';
+import { UserData } from './interfaces/base-response.interface';
 
+const SubjestsRouter = () => {
+  const getUserData: UserData = JSON.parse(String(localStorage.getItem('token')));
 
-const router = createBrowserRouter([
-  {
-    path:'/',
-    element: <Login/>
-  },
-  // {
-  //   path:'/register',
-  //   element: <Register/>
-  // },
-  {
-    element: <Layout/>,
-    children: [
-      {
-        path: '/home',
-        element: <Home></Home>
-      },
-      {
-        path: '/salones',
-        element: <Classrooms></Classrooms>
-      },
-      {
-        path: '/cursos',
-        element: <Subjects></Subjects>
-      },
-      {
-        path: '/usuarios',
-        element: <Users></Users>
-      },
-      {
-        path: '/alumnos',
-        element: <Students></Students>
-      },
-    ]
-  },
-])
+  if(getUserData.roles == 'Administrador'){
+    return <SubjectsAdmin></SubjectsAdmin>
+  } else {
+    return <Subjects></Subjects>
+  }
+}
+
 
 function App() {
+
   return (
     <>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+
+          <Route element={<Layout></Layout>}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/salones" element={<Classrooms />} />
+            <Route path="/cursos" element={<SubjestsRouter />} />
+            <Route path="/usuarios" element={<Users />} />
+            <Route path="/alumnos" element={<Students />} />
+          </Route>
+        </Routes >
+      </BrowserRouter>
     </>
   )
 }
