@@ -25,7 +25,7 @@ export const Classrooms = () => {
     };
 
     const getClassrooms = async () => {
-        await getDataApi('classrooms',).then((response: IClassrooms[]) => {
+        await getDataApi('classrooms').then((response: IClassrooms[]) => {
             setClassrooms(response)
         })
     }

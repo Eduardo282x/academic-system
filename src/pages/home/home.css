@@ -1,0 +1,9 @@
+.imgSchool{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 12rem;
+    width: 100%;
+    margin-bottom: 2rem;
+    background-image: url('../../assets/img/logoColegio2.png');
+}

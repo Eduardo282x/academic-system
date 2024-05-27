@@ -12,6 +12,7 @@ import { SubjectsAdmin } from './pages/(admin)/subjects/SubjectsAdmin';
 import { Students } from './pages/(admin)/students/Students';
 import { Subjects } from './pages/subjects/Subjects';
 import { UserData } from './interfaces/base-response.interface';
+import { Topics } from './pages/topics/Topics';
 
 const SubjestsRouter = () => {
   const getUserData: UserData = JSON.parse(String(localStorage.getItem('token')));
@@ -35,6 +36,7 @@ function App() {
           <Route element={<Layout></Layout>}>
             <Route path="/home" element={<Home />} />
             <Route path="/salones" element={<Classrooms />} />
+            <Route path="/temas" element={<Topics />} />
             <Route path="/cursos" element={<SubjestsRouter />} />
             <Route path="/usuarios" element={<Users />} />
             <Route path="/alumnos" element={<Students />} />

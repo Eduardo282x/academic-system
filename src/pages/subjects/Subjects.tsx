@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { getDataApi } from '../../backend/BaseAxios';
 import { ISubjects } from '../../interfaces/subjects.interface';
-import './subjects.css'
+import './subjects.css';
+import { useNavigate } from 'react-router-dom';
+
 export const Subjects = () => {
+    const navigate = useNavigate();
     const [subjects, setSubjects] = useState<ISubjects[]>([]);
 
     const getStudents = async () => {
@@ -18,7 +21,7 @@ export const Subjects = () => {
     return (
         <div className="cardDisplayComponent">
             {subjects.length > 0 && (
-                <div className='geometry'>
+                <div className='geometry' onClick={() =>navigate('/temas')}>
                 </div>
             )}
         </div>

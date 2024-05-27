@@ -4,9 +4,16 @@ import { UserData } from '../../interfaces/base-response.interface';
 import { baseColor } from '../../styles';
 import { Sidebar } from './Sidebar';
 import Drawer from '@mui/material/Drawer';
+import { useNavigate } from 'react-router-dom';
 export const Navbar = () => {
+    const navigate = useNavigate();
     const [userName, setUserName] = useState<string>('');
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
+
+    const logout = () => {
+        localStorage.clear();
+        navigate('/');
+    }
 
     useEffect(() => {
         const getUserData: UserData = JSON.parse(String(localStorage.getItem('token')));
@@ -27,7 +34,7 @@ export const Navbar = () => {
 
             <div className="flex items-center justify-center gap-2 mx-4">
                 <span className="material-icons-round mx-2 cursor-pointer ">account_circle</span>
-                <span>{userName}</span>
+                <span onClick={logout}>{userName}</span>
             </div>
         </div>
     )
