@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TableReturn } from "./table.interface";
+import { KeysForms } from "../components/form/formComponent";
+import { actionsValid, TableReturn } from "./table.interface";
 
 export interface IForm {
     title: string;
     dataForm: IDataForm[];
     defaultValues: any;
     validationSchema: any;
-    action: string;
-    keyWordId: string;
+    action: actionsValid;
+    keyWordId: KeysForms;
     onSubmitForm: (formData: TableReturn) => void;
 }
 

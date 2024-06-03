@@ -8,8 +8,9 @@ import { ColorButton } from '../buttonCustom/ButtonCustom';
 // import MenuItem from '@mui/material/MenuItem';
 // import Select from '@mui/material/Select';
 import './form.css'
+import TextField from '@mui/material/TextField';
 
-type Keys = 'classroomId' | 'userId' | 'id';
+export type KeysForms = 'classroomId' | 'userId' | 'id' | 'subjectId' | 'topicIc';
 
 export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWordId, validationSchema, action, onSubmitForm }) => {
 
@@ -19,22 +20,21 @@ export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWo
         mode: 'onChange'
     });
 
-    const {isValid} = useFormState({control});
+    const { isValid } = useFormState({ control });
 
     const onSubmit = (returnForm: any) => {
-        returnForm[keyWordId] = defaultValues[keyWordId as Keys];
+        returnForm[keyWordId] = defaultValues[keyWordId as KeysForms];
+
         const formData: TableReturn = {
             action: action,
             data: returnForm
         }
-
-        console.log(formData);
         
         onSubmitForm(formData)
     }
 
     return (
-        <div className='w-[30rem]'>
+        <div className='md:w-[30rem] w-[80vw]'>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center justify-center py-4 px-8'>
                 <h1 className='text-2xl font-bold text-blue-400'>{title}</h1>
 
@@ -53,8 +53,20 @@ export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWo
                             <label className=' text-black ml-2'>{form.label}</label>
                             <input type="number"
                                 className={`bg-gray-100 rounded-md w-full h-12 px-2 text-black outline-none border-2 border-solid ${errors[form.name]?.message ? 'border-red-500' : 'border-blue-200'} focus:border-blue-500`}
-                                {...register(form.name, {valueAsNumber: true})} />
+                                {...register(form.name, { valueAsNumber: true })} />
                             {errors[form.name]?.message && <p className='text-red-500 text-sm ml-2'>{errors[form.name]?.message}</p>}
+                        </div>
+                    ) ||
+                    (form.type == 'textArea' &&
+                        <div key={index} className="w-full my-3">
+                            <label className=' text-black ml-2'>{form.label}</label>
+                            {/* <label className=' text-black ml-2'>{form.label}</label> */}
+                            <TextField
+                                className='w-full'
+                                multiline
+                                rows={4}
+                                {...register(form.name)}
+                            />
                         </div>
                     ) ||
                     (form.type == 'select' &&

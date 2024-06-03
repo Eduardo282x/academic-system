@@ -1,6 +1,6 @@
 export interface ITopics {
-    topicIc:          number;
+    topicId:          number;
     topicName:        string;
     topicDescription: string;
-    subjectId:        number;
+    subjectId?:        number;
 }

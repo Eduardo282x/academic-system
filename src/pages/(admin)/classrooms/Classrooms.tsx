@@ -3,7 +3,7 @@ import { getDataApi} from '../../../backend/BaseAxios';
 import { TableComponent } from '../../../components/table/TableComponent';
 import { body, columnsClassrooms, configTableClassrooms, dataForm, validationClassrooms } from './classrooms.data';
 import { IClassrooms } from '../../../interfaces/classrooms.interface';
-import { TableReturn } from '../../../interfaces/table.interface';
+import { actionsValid, TableReturn } from '../../../interfaces/table.interface';
 import { FormComponent } from '../../../components/form/formComponent';
 import { Dialog } from '@mui/material';
 import { BaseApi, BaseApiReturn } from '../../../backend/BaseAPI';
@@ -13,7 +13,7 @@ export const Classrooms = () => {
     // const [dataFormClassrooms, setDataFormClassrooms] = useState<IDataForm[]>(dataForm);
     const [bodyClassrooms, setBodyClassrooms] = useState<IClassrooms>(body);
     const [title, setTitle] = useState<string>('Agregar');
-    const [action, setAction] = useState<string>('addApi');
+    const [action, setAction] = useState<actionsValid>('addApi');
     const [open, setOpen] = useState<boolean>(false);
 
     const handleClickOpen = () => {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface ITable{
+export interface ITable {
     title: string;
     dataTable: any[];
     columns: IColumns[];
@@ -13,9 +13,11 @@ export interface ConfigTable {
 }
 
 export interface TableReturn {
-    action: string;
+    action: actionsValid;
     data: any;
 }
+
+export type actionsValid = 'edit' | 'add' | 'delete' | 'addApi' | 'editApi' | '';
 
 export interface IColumns {
     header: string;

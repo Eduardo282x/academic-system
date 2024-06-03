@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { ConfigTable, IColumns } from "../../interfaces/table.interface";
-import { IUsers } from "../../interfaces/users.interface";
-import { IDataForm } from "../../interfaces/form.interface";
+import { IDataForm } from "../../../interfaces/form.interface";
+import { IColumns, ConfigTable } from "../../../interfaces/table.interface";
+import { IUsers } from "../../../interfaces/users.interface";
 
 export const columnsUsers: IColumns[] = [
     {

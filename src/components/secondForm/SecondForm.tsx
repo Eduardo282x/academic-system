@@ -7,7 +7,7 @@ import { TableReturn } from '../../interfaces/table.interface';
 import { ColorButton } from '../buttonCustom/ButtonCustom';
 import TextField from '@mui/material/TextField';
 
-type Keys = 'classroomId' | 'userId' | 'id';
+type Keys = 'classroomId' | 'userId' | 'id' | 'subjectId';
 
 export const SecondForm: FC<IForm> = ({ title, dataForm, defaultValues, keyWordId, validationSchema, action, onSubmitForm }) => {
 
@@ -33,7 +33,7 @@ export const SecondForm: FC<IForm> = ({ title, dataForm, defaultValues, keyWordI
 
 
     return (
-        <div className='w-[30rem]'>
+        <div className='md:w-[30rem] w-[80vw]'>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center justify-center py-4 px-8'>
                 <h1 className='text-2xl font-bold text-blue-400'>{title}</h1>
 
@@ -59,17 +59,13 @@ export const SecondForm: FC<IForm> = ({ title, dataForm, defaultValues, keyWordI
                     (form.type == 'textArea' &&
                         <div key={index} className="w-full my-3">
                             <label className=' text-black ml-2'>{form.label}</label>
+                            {/* <label className=' text-black ml-2'>{form.label}</label> */}
                             <TextField
-                                id="outlined-multiline-static"
-                                label="Multiline"
+                                className='w-full'
                                 multiline
                                 rows={4}
-                                defaultValue="Default Value"
+                                {...register(form.name)}
                             />
-                            <input type="number"
-                                className={`bg-gray-100 rounded-md w-full h-12 px-2 text-black outline-none border-2 border-solid ${errors[form.name]?.message ? 'border-red-500' : 'border-blue-200'} focus:border-blue-500`}
-                                {...register(form.name, { valueAsNumber: true })} />
-                            {errors[form.name]?.message && <p className='text-red-500 text-sm ml-2'>{errors[form.name]?.message}</p>}
                         </div>
                     ) ||
                     (form.type == 'select' &&

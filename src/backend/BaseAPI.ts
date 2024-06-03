@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseResponse } from "../interfaces/base-response.interface"
+import { actionsValid } from "../interfaces/table.interface"
 import { postDataApi, putDataApi, deleteDataApi } from "./BaseAxios"
 
 export interface BaseApiReturn {
@@ -7,11 +8,11 @@ export interface BaseApiReturn {
     open: boolean,
     body: object,
     title: string,
-    action: string,
-    data: any
+    action: actionsValid,
+    // data: any
 }
 
-export const BaseApi = async(action: string,data: any, body: any, keyWord: string, urlComponent: string): Promise<BaseApiReturn> => {
+export const BaseApi = async (action: actionsValid, data: any, body: any, keyWord: string, urlComponent: string): Promise<BaseApiReturn> => {
 
     const response: BaseApiReturn = {
         close: false,
@@ -19,29 +20,28 @@ export const BaseApi = async(action: string,data: any, body: any, keyWord: strin
         body: {},
         title: '',
         action: '',
-        data: false,
-    }
-
+    };
+    
     response.body = action === 'edit' ? data : body
     response.title = action === 'edit' ? 'Actualizar' : 'Agregar';
     response.action = action === 'edit' ? 'editApi' : 'addApi';
-    if(action === 'add' || action === 'edit'){
+    if (action === 'add' || action === 'edit') {
         response.open = true
     }
 
-    if(action === 'delete'){
-        await deleteApi(urlComponent ,data, keyWord)
+    if (action === 'delete') {
+        await deleteApi(urlComponent, data, keyWord)
     }
 
-    if(action =='addApi'){
-        await addApi(urlComponent ,data)
+    if (action == 'addApi') {
+        await addApi(urlComponent, data)
         response.close = true;
     }
-    if(action =='editApi'){
-        await updateApi(urlComponent ,data)
+    if (action == 'editApi') {
+        await updateApi(urlComponent, data)
         response.close = true;
     }
-    
+
     return response;
 }
 

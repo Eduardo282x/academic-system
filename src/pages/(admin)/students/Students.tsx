@@ -3,7 +3,7 @@ import { getDataApi } from "../../../backend/BaseAxios"
 import { IUsers } from "../../../interfaces/users.interface";
 import { TableComponent } from "../../../components/table/TableComponent";
 import { body, columnsStudents, configTableStudents, dataForm, validationStudents } from "./students.data";
-import { TableReturn } from "../../../interfaces/table.interface";
+import { actionsValid, TableReturn } from "../../../interfaces/table.interface";
 import Dialog from '@mui/material/Dialog';
 import { IDataForm, IOptions } from "../../../interfaces/form.interface";
 import { IClassrooms } from "../../../interfaces/classrooms.interface";
@@ -15,16 +15,12 @@ export const Students = () => {
     const [dataFormStudents, setDataFormStudents] = useState<IDataForm[]>(dataForm);
     const [bodyStudents, setBodyStudents] = useState<IUsers>(body);
     const [title, setTitle] = useState<string>('Agregar');
-    const [action, setAction] = useState<string>('addApi');
+    const [action, setAction] = useState<actionsValid>('addApi');
     const [open, setOpen] = useState<boolean>(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const handleClickOpen = () => setOpen(true);
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const handleClose = () => setOpen(false);
 
     const getStudents = async () => {
         await getDataApi('users/students').then((response: IUsers[]) => {
@@ -36,7 +32,7 @@ export const Students = () => {
         const copyDataForm: IDataForm[] = dataForm;
         const findClassroomsForm = copyDataForm.find(form => form.name == 'classroomId');
         await getDataApi('classrooms').then((response: IClassrooms[]) => {
-            if(findClassroomsForm){
+            if (findClassroomsForm) {
                 findClassroomsForm.options = response.map(classrooms => {
                     const option: IOptions = {
                         label: classrooms.grade,
@@ -52,27 +48,16 @@ export const Students = () => {
 
     const openDialog = async (tableReturn: TableReturn) => {
         const { data, action } = tableReturn;
-        console.log('get data:', data);
-        
-        const responseBaseApi: BaseApiReturn = await BaseApi(action,data,body,'userId','users/students');
-        if(responseBaseApi.open){
-            handleClickOpen()
-        }
-        if(responseBaseApi.close){
-            handleClose()
-        }
-        
+
+        const responseBaseApi: BaseApiReturn = await BaseApi(action, data, body, 'userId', 'users/students');
+        if (responseBaseApi.open) { handleClickOpen() }
+        if (responseBaseApi.close) { handleClose() }
+
         setBodyStudents(responseBaseApi.body as IUsers)
         setTitle(responseBaseApi.title);
         setAction(responseBaseApi.action);
 
-        setTimeout(() => {
-            console.log(bodyStudents);
-        }, 1500);
-
-        if(responseBaseApi){  
-            getStudents()
-        }
+        if (responseBaseApi) { getStudents(); }
     }
 
     useEffect(() => {

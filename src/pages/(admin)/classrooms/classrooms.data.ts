@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { IClassrooms } from "../../interfaces/classrooms.interface";
-import { IColumns, ConfigTable } from "../../interfaces/table.interface";
-import { IDataForm } from "../../interfaces/form.interface";
+import { IClassrooms } from "../../../interfaces/classrooms.interface";
+import { IDataForm } from "../../../interfaces/form.interface";
+import { IColumns, ConfigTable } from "../../../interfaces/table.interface";
 
 export const columnsClassrooms: IColumns[] = [
     {
