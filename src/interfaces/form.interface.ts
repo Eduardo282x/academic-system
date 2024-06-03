@@ -14,10 +14,12 @@ export interface IForm {
 export interface IDataForm {
     label: string;
     value: string;
-    type: string;
+    type: TypesInputs;
     name: string;
     options?: IOptions[];
 }
+
+export type TypesInputs = 'text' | 'number' | 'select' | 'textArea';
 
 export interface IOptions {
     label: string;

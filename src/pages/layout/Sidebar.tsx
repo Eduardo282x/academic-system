@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { UserData } from "../../interfaces/base-response.interface";
 import { baseColor } from "../../styles";
 import './sidebar.css'
+import { userToken } from "../../backend/authenticate";
 
 interface ISidebar {
     widthMobile: boolean;
@@ -15,7 +16,7 @@ export const Sidebar: FC<ISidebar> = ({widthMobile}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userData: UserData = JSON.parse(String(localStorage.getItem('token')));
+        const userData: UserData = userToken();
         const menuCopy: IMenu[]  = menu.filter(item => item.rol.toString().toLowerCase().includes(userData.roles.toLowerCase()));
         setMenuFilter(menuCopy)
     },[])

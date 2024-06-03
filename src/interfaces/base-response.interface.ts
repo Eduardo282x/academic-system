@@ -24,5 +24,7 @@ export interface UserData {
     email:    string;
     age:      string;
     rolId:    number;
-    roles:  string;
+    roles:    typeRoles;
 }
+
+export type typeRoles = 'Profesor' | 'Administrador' | 'Estudiante';

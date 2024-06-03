@@ -13,9 +13,10 @@ import { Students } from './pages/(admin)/students/Students';
 import { Subjects } from './pages/subjects/Subjects';
 import { UserData } from './interfaces/base-response.interface';
 import { Topics } from './pages/topics/Topics';
+import { userToken } from './backend/authenticate';
 
 const SubjestsRouter = () => {
-  const getUserData: UserData = JSON.parse(String(localStorage.getItem('token')));
+  const getUserData: UserData = userToken();
 
   if(getUserData.roles == 'Administrador'){
     return <SubjectsAdmin></SubjectsAdmin>

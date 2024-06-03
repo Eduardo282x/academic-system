@@ -10,6 +10,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Navbar } from "./Navbar";
 import { minWidthMobile } from "../../styles";
+import { userToken } from "../../backend/authenticate";
 
 export const Layout = () => {
     const [width, setWidth] = useState(window.innerWidth);
@@ -46,7 +47,7 @@ export const Layout = () => {
     }, []);
 
     useEffect(() => {
-        const getUserData: UserData = JSON.parse(String(localStorage.getItem('token')));
+        const getUserData: UserData = userToken();
         setUserName(getUserData.username);
     }, [])
 

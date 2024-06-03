@@ -5,6 +5,7 @@ import { baseColor } from '../../styles';
 import { Sidebar } from './Sidebar';
 import Drawer from '@mui/material/Drawer';
 import { useNavigate } from 'react-router-dom';
+import { userToken } from '../../backend/authenticate';
 export const Navbar = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState<string>('');
@@ -16,7 +17,7 @@ export const Navbar = () => {
     }
 
     useEffect(() => {
-        const getUserData: UserData = JSON.parse(String(localStorage.getItem('token')));
+        const getUserData: UserData = userToken();
         setUserName(getUserData.username);
     }, [])
 
