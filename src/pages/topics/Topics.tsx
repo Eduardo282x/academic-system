@@ -40,6 +40,14 @@ export const Topics = () => {
         }
     }
 
+    const addTopic = () => {
+        openDialog({
+            data: {},
+            action: 'add'
+        })
+        handleClickOpen();
+    }
+
     const editTopic = (topic: ITopics) => {
         openDialog({
             data: topic,
@@ -89,13 +97,34 @@ export const Topics = () => {
                                 <p className='pl-4 mt-4 leading-5'>{top.topicDescription}</p>
                             </div>
                             <Divider />
+
+                            {top.activities.length > 0 && (
+                                <>
+                                    <div className="py-4">
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <span className="material-icons-round text-orange-600">task</span>
+                                                <span className='text-2xl pl-2 underline '>{top.activities[0].activityName}</span>
+                                            </div>
+
+                                            {showBtnEdit && (
+                                                <IconButton color="primary" onClick={() => editTopic(top)}>
+                                                    <span className="material-icons-round ">edit</span>
+                                                </IconButton>
+                                            )}
+                                        </div>
+                                        <p className='pl-4 mt-4 leading-5'>{top.activities[0].activityDescription}</p>
+                                    </div>
+                                    <Divider />
+                                </>
+                            )}
                         </div>
                     ))}
                 </div>
 
                 {showBtnAdd &&
                     <div className='w-full flex items-center justify-center'>
-                        <Button variant="contained" onClick={handleClickOpen}>Agregar nuevo</Button>
+                        <Button variant="contained" onClick={addTopic}>Agregar nuevo</Button>
                     </div>
                 }
             </div>
@@ -106,15 +135,15 @@ export const Topics = () => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-            
-                <FormComponent 
-                title={title} 
-                action={action} 
-                dataForm={dataForm} 
-                defaultValues={bodyTopics} 
-                validationSchema={validationStudents} 
-                onSubmitForm={openDialog} 
-                keyWordId={"topicIc"}></FormComponent>
+
+                <FormComponent
+                    title={title}
+                    action={action}
+                    dataForm={dataForm}
+                    defaultValues={bodyTopics}
+                    validationSchema={validationStudents}
+                    onSubmitForm={openDialog}
+                    keyWordId={"topicIc"}></FormComponent>
             </Dialog>
         </div>
     )

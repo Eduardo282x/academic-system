@@ -1,6 +1,14 @@
 export interface ITopics {
-    topicId:          number;
-    topicName:        string;
+    topicId: number;
+    topicName: string;
     topicDescription: string;
-    subjectId?:        number;
+    subjectId?: number;
+    activities: Activities[]
+}
+
+export interface Activities {
+    activityId: number;
+    activityName: string;
+    activityDescription: string;
+    topidId: number;
 }
