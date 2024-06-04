@@ -83,9 +83,9 @@ export const Topics = () => {
                         <div key={index}>
                             <div className="py-4">
                                 <div className="flex items-center justify-between">
-                                    <div>
-                                        <span className="material-icons-round text-blue-600">menu_book</span>
-                                        <span className='text-2xl pl-2 underline'>{top.topicName}</span>
+                                    <div className='flex'>
+                                        <span className="material-icons-round text-blue-600 maxIcon" >menu_book</span>
+                                        <span className='text-2xl pl-2 text-blue-600 font-semibold'>{top.topicName}</span>
                                     </div>
 
                                     {showBtnEdit && (
@@ -94,7 +94,7 @@ export const Topics = () => {
                                         </IconButton>
                                     )}
                                 </div>
-                                <p className='pl-4 mt-4 leading-5'>{top.topicDescription}</p>
+                                <p className='px-2 mt-4 leading-5 text-justify'>{top.topicDescription}</p>
                             </div>
                             <Divider />
 
@@ -102,9 +102,9 @@ export const Topics = () => {
                                 <>
                                     <div className="py-4">
                                         <div className="flex items-center justify-between">
-                                            <div>
+                                            <div className="flex">
                                                 <span className="material-icons-round text-orange-600">task</span>
-                                                <span className='text-2xl pl-2 underline '>{top.activities[0].activityName}</span>
+                                                <span className='text-2xl pl-2 text-orange-600 font-semibold maxIcon' >{top.activities[0].activityName}</span>
                                             </div>
 
                                             {showBtnEdit && (
@@ -113,7 +113,7 @@ export const Topics = () => {
                                                 </IconButton>
                                             )}
                                         </div>
-                                        <p className='pl-4 mt-4 leading-5'>{top.activities[0].activityDescription}</p>
+                                        <p className='px-2 text-justify mt-4 leading-5'>{top.activities[0].activityDescription}</p>
                                     </div>
                                     <Divider />
                                 </>
