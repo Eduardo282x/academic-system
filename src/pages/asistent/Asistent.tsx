@@ -5,38 +5,41 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import { IUsers } from '../../interfaces/users.interface';
+import { IAssistent } from '../../interfaces/users.interface';
 import { getDataApi } from '../../backend/BaseAxios';
 import { Button } from '@mui/material';
 
 export const Asistent = () => {
 
-    const [studentsData, setStudentsData] = React.useState<IUsers[]>([]);
+    const [studentsData, setStudentsData] = React.useState<IAssistent[]>([]);
 
     const getStudents = async () => {
-        await getDataApi('users/students').then((response: IUsers[]) => {
+        await getDataApi('users/students').then((response: IAssistent[]) => {
+            response.map((assis: IAssistent) => assis.assistent = false);
             setStudentsData(response)
         })
     };
 
-
-    const [checked, setChecked] = React.useState([0]);
-
-    const handleToggle = (value: number) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
+    const handleToggle = (student: IAssistent) => () => {
+        const copyStudent = [...studentsData];
+        const findStudent = copyStudent.find(stu => stu.studentId == student.studentId)
+        
+        if(findStudent){
+            findStudent.assistent = !findStudent.assistent
         }
 
-        setChecked(newChecked);
+        setStudentsData(copyStudent);
     };
 
     const saveAssistent = () => {
-        console.log('Asistencia guardada');
+        const copyStudent = [...studentsData];
+        const sendAssistent = copyStudent.map((stu: IAssistent) => {
+            return {
+                studentId: stu.studentId,
+                assistent: stu.assistent
+            }
+        })
+        console.log('Asistencia guardada', sendAssistent);
     }
 
     React.useEffect(() => {
@@ -50,25 +53,23 @@ export const Asistent = () => {
                 <Button variant="contained" onClick={saveAssistent}>Guardar</Button>
             </div>
             <List sx={{ width: '100%', bgcolor: 'background.paper',color:'black' }}>
-                {studentsData && studentsData.map((stu: IUsers, index: number) => {
-                    const labelId = `checkbox-list-label-${index}`;
+                {studentsData && studentsData.map((stu: IAssistent, index: number) => {
 
                     return (
                         <ListItem
                             key={index}
                             disablePadding
                         >
-                            <ListItemButton role={undefined} onClick={handleToggle(index)} dense>
+                            <ListItemButton role={undefined} onClick={handleToggle(stu)} dense>
                                 <ListItemIcon>
                                     <Checkbox
                                         edge="start"
-                                        checked={checked.indexOf(index) !== -1}
-                                        tabIndex={-1}
+                                        checked={stu.assistent}
+                                        onChange={handleToggle(stu)}
                                         disableRipple
-                                        inputProps={{ 'aria-labelledby': labelId }}
                                     />
                                 </ListItemIcon>
-                                <ListItemText id={labelId} primary={`${stu.name} ${stu.lastname}`} />
+                                <ListItemText id={stu.name} primary={`${stu.name} ${stu.lastname}`} />
                             </ListItemButton>
                         </ListItem>
                     );
