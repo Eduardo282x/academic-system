@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC, useEffect, useState } from "react";
-import { IColumns, ITable, TableReturn } from "../../interfaces/table.interface";
+import { IColumns, ITable, TableReturn, actionsValid } from "../../interfaces/table.interface";
 import { InputCustom } from "../inputCustom/InputCustom";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableBody, TableCell, TablePagination, IconButton } from "@mui/material";
 import { Actions, StyledTableCell } from "./table.data";
@@ -15,7 +15,7 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title, configTa
 
     const sendData = (data: object | null, action: string) => {
         const dataForm: TableReturn = {
-            action: action,
+            action: action as actionsValid,
             data: data
         }
         openForm(dataForm)
@@ -60,7 +60,7 @@ export const TableComponent: FC<ITable> = ({ dataTable, columns, title, configTa
                 </div>
                 <div className="flex items-center justify-center h-full gap-2">
                     {configTable.searchInput &&
-                        <div className="w-[18rem]">
+                        <div className="w-[10rem] md:w-[18rem]">
                             <InputCustom placeholder={'Buscar'} iconLeft={true} onChangeOuput={onFilter} icon={'search'}></InputCustom>
                         </div>
                     }

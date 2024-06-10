@@ -45,6 +45,12 @@ export const menu: IMenu[] = [
         rol: ['Estudiante','Profesor']
     },
     {
+        title: 'Asistencias',
+        icon: 'back_hand',
+        redirect: '/asistencia',
+        rol: ['Profesor']
+    },
+    {
         title: 'Profesores',
         icon: 'group',
         redirect: '/usuarios',

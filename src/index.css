@@ -30,9 +30,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  background-color: #e4e4e7;
+  background-color: transparent;
   border-radius: 1rem;
-
 }
 
 ::-webkit-scrollbar:vertical {
@@ -44,9 +43,9 @@ body {
 } 
 
 ::-webkit-scrollbar-thumb {
-  background-color: #797979;
+  background-color: transparent;
   border-radius: 1rem;
-  border: 1px solid #f1f2f3;
+  /* border: 1px solid #f1f2f3; */
 }
 
 ::-webkit-scrollbar-track {

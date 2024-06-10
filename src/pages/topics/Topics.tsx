@@ -77,7 +77,13 @@ export const Topics = () => {
 
     return (
         <div className='cardDisplayComponent'>
-            <div className="m-1 w-full h-auto p-2 rounded-xl bg-white text-black">
+            <div className="flex items-center justify-between my-2 w-full">
+                <h1 className=' text-2xl font-bold'>Geometria</h1>
+                {showBtnAdd &&
+                    <Button variant="contained" onClick={addTopic}>Agregar nuevo</Button>
+                }
+            </div>
+            <div className="w-full p-2 rounded-xl bg-white h-[80%] overflow-y-scroll text-black">
                 <div className='mb-2'>
                     {topics && topics.map((top: ITopics, index: number) => (
                         <div key={index}>
@@ -90,6 +96,7 @@ export const Topics = () => {
 
                                     {showBtnEdit && (
                                         <IconButton color="primary" onClick={() => editTopic(top)}>
+                                            <span className="material-icons-round ">add</span>
                                             <span className="material-icons-round ">edit</span>
                                         </IconButton>
                                     )}
@@ -109,7 +116,7 @@ export const Topics = () => {
 
                                             {showBtnEdit && (
                                                 <IconButton color="primary" onClick={() => editTopic(top)}>
-                                                    <span className="material-icons-round ">edit</span>
+                                                    <span className="material-icons-round text-orange-600">edit</span>
                                                 </IconButton>
                                             )}
                                         </div>
@@ -122,11 +129,7 @@ export const Topics = () => {
                     ))}
                 </div>
 
-                {showBtnAdd &&
-                    <div className='w-full flex items-center justify-center'>
-                        <Button variant="contained" onClick={addTopic}>Agregar nuevo</Button>
-                    </div>
-                }
+
             </div>
 
             <Dialog
