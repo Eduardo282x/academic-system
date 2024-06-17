@@ -10,11 +10,13 @@ import { body, dataForm, validationStudents } from './topics.data';
 import { actionsValid, TableReturn } from '../../interfaces/table.interface';
 import { FormComponent } from '../../components/form/formComponent';
 import { BaseApiReturn, BaseApi } from '../../backend/BaseAPI';
+import { UploadForm } from '../../components/uploadForm/UploadForm';
 
 export const Topics = () => {
     const [topics, setTopics] = useState<ITopics[]>([]);
     const [showBtnAdd, setShowBtnAdd] = useState<boolean>(false);
     const [showBtnEdit, setShowBtnEdit] = useState<boolean>(false);
+    const user: UserData = userToken();
 
     const [bodyTopics, setBodyTopics] = useState<ITopics>(body);
     const [title, setTitle] = useState<string>('Agregar nuevo tema');
@@ -33,10 +35,15 @@ export const Topics = () => {
     }
 
     const validateRol = () => {
-        const user: UserData = userToken();
         if (user.roles !== "Estudiante") {
             setShowBtnAdd(true);
             setShowBtnEdit(true);
+        }
+    }
+
+    const uploadFile = () => {
+        if (user.roles == "Estudiante") {
+            handleClickOpen();
         }
     }
 
@@ -107,7 +114,7 @@ export const Topics = () => {
 
                             {top.activities.length > 0 && (
                                 <>
-                                    <div className="py-4">
+                                    <div className="py-4" onClick={uploadFile}>
                                         <div className="flex items-center justify-between">
                                             <div className="flex">
                                                 <span className="material-icons-round text-orange-600">task</span>
@@ -138,15 +145,21 @@ export const Topics = () => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
+                {user.roles !== "Estudiante" ?
+                    <FormComponent
+                        title={title}
+                        action={action}
+                        dataForm={dataForm}
+                        defaultValues={bodyTopics}
+                        validationSchema={validationStudents}
+                        onSubmitForm={openDialog}
+                        keyWordId={"topicIc"}></FormComponent>
 
-                <FormComponent
-                    title={title}
-                    action={action}
-                    dataForm={dataForm}
-                    defaultValues={bodyTopics}
-                    validationSchema={validationStudents}
-                    onSubmitForm={openDialog}
-                    keyWordId={"topicIc"}></FormComponent>
+                    :
+                    <UploadForm closeDialog={handleClose}>
+
+                    </UploadForm>
+                }
             </Dialog>
         </div>
     )

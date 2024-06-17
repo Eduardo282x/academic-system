@@ -6,12 +6,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import { IAssistent } from '../../interfaces/users.interface';
-import { getDataApi } from '../../backend/BaseAxios';
+import { getDataApi, postDataApi } from '../../backend/BaseAxios';
 import { Button } from '@mui/material';
 
 export const Asistent = () => {
 
     const [studentsData, setStudentsData] = React.useState<IAssistent[]>([]);
+    const [disableBtn, setDisableBtn] = React.useState<boolean>(false);
 
     const getStudents = async () => {
         await getDataApi('users/students').then((response: IAssistent[]) => {
@@ -19,6 +20,14 @@ export const Asistent = () => {
             setStudentsData(response)
         })
     };
+
+    const getAttendance = async () => {
+        await getDataApi('attendance').then((response: boolean) => {
+            console.log(response);
+            
+            setDisableBtn(response);
+        })
+    }
 
     const handleToggle = (student: IAssistent) => () => {
         const copyStudent = [...studentsData];
@@ -31,7 +40,7 @@ export const Asistent = () => {
         setStudentsData(copyStudent);
     };
 
-    const saveAssistent = () => {
+    const saveAssistent = async () => {
         const copyStudent = [...studentsData];
         const sendAssistent = copyStudent.map((stu: IAssistent) => {
             return {
@@ -40,18 +49,28 @@ export const Asistent = () => {
             }
         })
         console.log('Asistencia guardada', sendAssistent);
+
+        const save = await postDataApi('attendance', sendAssistent);
+        console.log(save);
+        
+
+        getAttendance();
     }
 
     React.useEffect(() => {
         getStudents();
+        getAttendance();
     }, []);
 
     return (
-        <div className='cardDisplayComponent '>
+        <div className='cardDisplayComponent'>
             <div className="flex items-center justify-between my-2 w-full">
                 <h1 className='text-2xl font-bold'>Asistencia</h1>
-                <Button variant="contained" onClick={saveAssistent}>Guardar</Button>
+                <Button variant="contained" disabled={disableBtn} onClick={saveAssistent}>Guardar</Button>
             </div>
+            {disableBtn && 
+                <p className='my-2'>Ya se guardo la asistencia del dia de hoy.</p>
+            }
             <List sx={{ width: '100%', bgcolor: 'background.paper',color:'black' }}>
                 {studentsData && studentsData.map((stu: IAssistent, index: number) => {
 
