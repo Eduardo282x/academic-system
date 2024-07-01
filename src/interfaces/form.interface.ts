@@ -12,6 +12,10 @@ export interface IForm {
     onSubmitForm: (formData: TableReturn) => void;
 }
 
+export interface IDynamicForm {
+    [key: string] : string;
+}
+
 export interface IDataForm {
     label: string;
     value: string;
