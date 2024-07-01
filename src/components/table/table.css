@@ -1,0 +1,27 @@
+
+.editBtn{
+    z-index: 0;
+}
+
+.tableScroll{
+    width: 98% !important;
+    position: relative;
+    overflow-y: auto;
+    height: 27rem;
+    margin-top: 2rem;
+    padding: 0 .5rem;
+}
+
+@media (max-width: 768px) {
+    .tableScroll{
+        width: 108% !important;
+        overflow-y: auto;
+        height: 27rem;
+        padding: 0;
+    }
+}
+
+
+.normalWidth{
+    width: 70rem;
+}

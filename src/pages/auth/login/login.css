@@ -1,0 +1,34 @@
+.imgBackground{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../assets/img/studentsBackgrounds.png');
+}
+
+@media (max-width: 768px) {
+    .imgBackground{
+        background-image: url('../../../assets/img/mobile.jpg');
+    }
+}
+
+.imgWave{
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* background-position: 250px; */
+    height: 100%;
+}
+
+.imgBackground p{
+    color: transparent;
+}
+
+.imgSchool{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 12rem;
+    width: 12rem;
+    background-image: url('../../../assets/img/logoColegio2.png');
+}

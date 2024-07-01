@@ -1,0 +1,27 @@
+.sideBar:hover .titleHidden{
+    display: block;
+}
+
+.sideBarMobile .titleHidden{
+    display: block;
+}
+
+.titleHidden,.imgSchoolSidebar{
+    display: none;
+}
+
+.animationDisplay{
+    transition: .5s;
+}
+
+.sideBar:hover .imgSchoolSidebar{
+    background-size: cover;
+    /* display: block; */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 8rem;
+    width: 8rem;
+    margin: auto;
+    background-image: url('../../assets/img/logoColegio2.png');
+}
+
