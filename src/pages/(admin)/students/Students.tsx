@@ -85,7 +85,7 @@ export const Students = () => {
         <div className="cardDisplayComponent">
             {studentsData.length > 0 && (
                 <div >
-                    <TableComponent title="Estudiantes" configTable={configTable} columns={columns} dataTable={studentsData} openForm={openDialog}></TableComponent>
+                    <TableComponent title="Alumnos" configTable={configTable} columns={columns} dataTable={studentsData} openForm={openDialog}></TableComponent>
                 </div>
             )}
 

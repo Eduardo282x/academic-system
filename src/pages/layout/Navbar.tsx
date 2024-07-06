@@ -12,9 +12,8 @@ export const Navbar = () => {
     const [userName, setUserName] = useState<string>('');
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
-    const logout = () => {
-        localStorage.clear();
-        navigate('/');
+    const myProfile = () => {
+        navigate('/perfil');
     }
 
     const handleResize = () => {
@@ -41,12 +40,12 @@ export const Navbar = () => {
                     <Sidebar widthMobile={true}></Sidebar>
                 </Drawer>
             )}
-            <div className="flex items-center justify-center gap-5 cursor-pointer">
-                <button onClick={() => setShowSidebar(!showSidebar)} className="material-icons-round mx-2 cursor-pointer ">menu</button>
+            <div onClick={() => setShowSidebar(!showSidebar)} className="flex items-center justify-center gap-5 cursor-pointer">
+                <button className="material-icons-round mx-2 cursor-pointer ">menu</button>
                 <p className='font-bold'>Jorge Washington</p>
             </div>
 
-            <div className="flex items-center justify-center gap-2 mx-4" onClick={logout}>
+            <div className="flex items-center justify-center gap-2 mx-4" onClick={myProfile}>
                 <span className="material-icons-round mx-2 cursor-pointer ">account_circle</span>
                 {width >= minWidthMobile &&
                     <span >{userName}</span>

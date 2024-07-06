@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { ITopics } from '../../interfaces/topics.interface';
-import { getDataApi } from '../../backend/BaseAxios';
+import { Activities, ITopics } from '../../interfaces/topics.interface';
+import { getDataApi,  postFilesDataApi } from '../../backend/BaseAxios';
 import './topics.css';
 import { Button, Divider, IconButton } from '@mui/material';
 import { UserData } from '../../interfaces/base-response.interface';
@@ -16,6 +16,8 @@ export const Topics = () => {
     const [topics, setTopics] = useState<ITopics[]>([]);
     const [showBtnAdd, setShowBtnAdd] = useState<boolean>(false);
     const [showBtnEdit, setShowBtnEdit] = useState<boolean>(false);
+    const [activity, setActivity] = useState<Activities>();
+
     const user: UserData = userToken();
 
     const [bodyTopics, setBodyTopics] = useState<ITopics>(body);
@@ -27,6 +29,14 @@ export const Topics = () => {
     const handleClickOpen = () => setOpen(true);
 
     const handleClose = () => setOpen(false);
+
+    const sendFileData = async (file: File | null) => {
+        console.log(file);
+        console.log(activity);
+        
+        await postFilesDataApi(`activities?activityId=${activity?.activityId}&studentId=${user.id}`,file as File);
+        handleClose();
+    }
 
     const getTopics = async () => {
         await getDataApi('topics').then((responseTopics: ITopics[]) => {
@@ -41,7 +51,8 @@ export const Topics = () => {
         }
     }
 
-    const uploadFile = () => {
+    const uploadFile = (activity: Activities) => {
+        setActivity(activity);
         if (user.roles == "Estudiante") {
             handleClickOpen();
         }
@@ -114,7 +125,7 @@ export const Topics = () => {
 
                             {top.activities.length > 0 && (
                                 <>
-                                    <div className="py-4" onClick={uploadFile}>
+                                    <div className="py-4" onClick={() => uploadFile(top.activities[0])}>
                                         <div className="flex items-center justify-between">
                                             <div className="flex">
                                                 <span className="material-icons-round text-orange-600">task</span>
@@ -156,7 +167,7 @@ export const Topics = () => {
                         keyWordId={"topicIc"}></FormComponent>
 
                     :
-                    <UploadForm closeDialog={handleClose}>
+                    <UploadForm closeDialog={sendFileData} activityId={activity?.activityId} studentId={user.id}>
 
                     </UploadForm>
                 }

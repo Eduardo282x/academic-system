@@ -83,6 +83,7 @@ export const Asistent = () => {
                                 <ListItemIcon>
                                     <Checkbox
                                         edge="start"
+                                        onClick={handleToggle(stu)}
                                         checked={stu.assistent}
                                         onChange={handleToggle(stu)}
                                         disableRipple
