@@ -23,8 +23,6 @@ export const Asistent = () => {
 
     const getAttendance = async () => {
         await getDataApi('attendance').then((response: boolean) => {
-            console.log(response);
-            
             setDisableBtn(response);
         })
     }
@@ -48,11 +46,9 @@ export const Asistent = () => {
                 assistent: stu.assistent
             }
         })
-        console.log('Asistencia guardada', sendAssistent);
 
         const save = await postDataApi('attendance', sendAssistent);
         console.log(save);
-        
 
         getAttendance();
     }

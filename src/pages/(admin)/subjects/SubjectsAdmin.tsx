@@ -16,6 +16,7 @@ export const SubjectsAdmin = () => {
     const voidFunction = (anything: unknown) => {
         console.log(anything);
     }
+    
     useEffect(() => {
         getStudents();
     },[])
