@@ -16,6 +16,7 @@ import { Topics } from './pages/topics/Topics';
 import { userToken } from './backend/authenticate';
 import { Asistent } from './pages/asistent/Asistent';
 import { Profile } from './pages/profile/Profile';
+import { Activities } from './pages/activities/Activities';
 
 const SubjestsRouter = () => {
   const getUserData: UserData = userToken();
@@ -43,6 +44,7 @@ function App() {
             <Route path="/temas" element={<Topics />} />
             <Route path="/cursos" element={<SubjestsRouter />} />
             <Route path="/asistencia" element={<Asistent />} />
+            <Route path="/actividades" element={<Activities />} />
             <Route path="/usuarios" element={<Users />} />
             <Route path="/alumnos" element={<Students />} />
           </Route>

@@ -9,6 +9,15 @@ export const getDataApi = (endpoint: string) => {
         return err.response.data;
     })
 }
+export const getDataFileApi = (endpoint: string) => {
+    return axios.get(endpoint, {
+        responseType: 'blob'
+    }).then((response) => {
+        return response.data;
+    }).catch(err => {
+        return err.response.data;
+    })
+}
 
 export const getParamsDataApi = (endpoint: string, params: any) => {
     return axios.get(endpoint, {params}).then((response) => {

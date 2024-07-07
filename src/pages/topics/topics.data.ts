@@ -1,8 +1,8 @@
 import { z } from "zod"
 import { IDataForm } from "../../interfaces/form.interface"
-import { ITopics } from "../../interfaces/topics.interface"
+import { NewTopics } from "../../interfaces/topics.interface"
 
-export const body: ITopics = {
+export const body: NewTopics = {
     topicId: 0,
     topicName: '',
     topicDescription: '',

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Activities, ITopics } from '../../interfaces/topics.interface';
+import { IActivities, ITopics, NewTopics } from '../../interfaces/topics.interface';
 import { getDataApi,  postFilesDataApi } from '../../backend/BaseAxios';
 import './topics.css';
 import { Button, Divider, IconButton } from '@mui/material';
@@ -11,16 +11,17 @@ import { actionsValid, TableReturn } from '../../interfaces/table.interface';
 import { FormComponent } from '../../components/form/formComponent';
 import { BaseApiReturn, BaseApi } from '../../backend/BaseAPI';
 import { UploadForm } from '../../components/uploadForm/UploadForm';
+import { ColorButton } from '../../components/buttonCustom/ButtonCustom';
 
 export const Topics = () => {
     const [topics, setTopics] = useState<ITopics[]>([]);
     const [showBtnAdd, setShowBtnAdd] = useState<boolean>(false);
     const [showBtnEdit, setShowBtnEdit] = useState<boolean>(false);
-    const [activity, setActivity] = useState<Activities>();
+    const [activity, setActivity] = useState<IActivities>();
 
     const user: UserData = userToken();
 
-    const [bodyTopics, setBodyTopics] = useState<ITopics>(body);
+    const [bodyTopics, setBodyTopics] = useState<NewTopics>(body);
     const [title, setTitle] = useState<string>('Agregar nuevo tema');
     const [action, setAction] = useState<actionsValid>('addApi');
 
@@ -31,9 +32,6 @@ export const Topics = () => {
     const handleClose = () => setOpen(false);
 
     const sendFileData = async (file: File | null) => {
-        console.log(file);
-        console.log(activity);
-        
         await postFilesDataApi(`activities?activityId=${activity?.activityId}&studentId=${user.id}`,file as File);
         handleClose();
     }
@@ -51,7 +49,7 @@ export const Topics = () => {
         }
     }
 
-    const uploadFile = (activity: Activities) => {
+    const uploadFile = (activity: IActivities) => {
         setActivity(activity);
         if (user.roles == "Estudiante") {
             handleClickOpen();
@@ -98,7 +96,7 @@ export const Topics = () => {
             <div className="flex items-center justify-between my-2 w-full">
                 <h1 className=' text-2xl font-bold'>Geometria</h1>
                 {showBtnAdd &&
-                    <Button variant="contained" onClick={addTopic}>Agregar nuevo</Button>
+                    <Button variant="contained" onClick={addTopic}>Agregar tema</Button>
                 }
             </div>
             <div className="w-full p-2 rounded-xl bg-white h-[80%] overflow-y-scroll text-black">
@@ -114,12 +112,17 @@ export const Topics = () => {
 
                                     {showBtnEdit && (
                                         <IconButton color="primary" onClick={() => editTopic(top)}>
-                                            <span className="material-icons-round ">add</span>
                                             <span className="material-icons-round ">edit</span>
                                         </IconButton>
                                     )}
                                 </div>
                                 <p className='px-2 mt-4 leading-5 text-justify'>{top.topicDescription}</p>
+
+                                {showBtnEdit && (
+                                    <div className='flex items-center justify-center  w-full'>
+                                        <ColorButton className='w-[80%] !p-2 mx-auto !mt-6 !mb-0' onClick={addTopic}>Agregar actividad</ColorButton>
+                                    </div>
+                                )}
                             </div>
                             <Divider />
 
@@ -167,7 +170,7 @@ export const Topics = () => {
                         keyWordId={"topicIc"}></FormComponent>
 
                     :
-                    <UploadForm closeDialog={sendFileData} activityId={activity?.activityId} studentId={user.id}>
+                    <UploadForm closeDialog={sendFileData} activityId={activity?.activityId} studentId={user.id} loadGrade={handleClose}>
 
                     </UploadForm>
                 }
