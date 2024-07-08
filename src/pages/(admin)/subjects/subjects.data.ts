@@ -36,6 +36,6 @@ export const columnsSubjects: IColumns[] = [
 ];
 
 export const configTableSubjects: ConfigTable = {
-    addBtn: false,
+    addBtn: true,
     searchInput: false
 }

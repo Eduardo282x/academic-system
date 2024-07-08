@@ -50,7 +50,7 @@ export const dataForm: IDataForm[] = [
 ]
 
 export const configTableClassrooms: ConfigTable = {
-    addBtn: false,
+    addBtn: true,
     searchInput: false
 }
 

@@ -29,6 +29,12 @@ export const columnsUsers: IColumns[] = [
         filterOption: true
     },
     {
+        header: 'Cedula',
+        column: 'identify',
+        type: 'text',
+        filterOption: true
+    },
+    {
         header: 'Editar',
         column: 'edit',
         type: 'icon',
@@ -54,6 +60,7 @@ export const body: IUsers = {
     username: '',
     email: '',
     age: '',
+    identify: '',
 }
 
 export const validationUsers: object = z.object({
@@ -62,6 +69,7 @@ export const validationUsers: object = z.object({
     username: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
     email: z.string().email({message: 'El correo es requerido'}),
     age: z.number().max(100, {message: 'La edad no puede ser mayor a 100'}),
+    identify: z.string().refine(text => text.length <= 8 , {message: 'La cedula no puede tener más de 8 caracteres'}),
 })
 
 export const dataForm: IDataForm[] = [
@@ -94,6 +102,12 @@ export const dataForm: IDataForm[] = [
         value: '',
         type: 'number',
         name: 'age',
+    },
+    {
+        label: 'Cedula',
+        value: '',
+        type: 'text',
+        name: 'identify',
     }
 ]
 
