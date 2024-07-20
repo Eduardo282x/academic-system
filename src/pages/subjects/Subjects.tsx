@@ -16,14 +16,16 @@ export const Subjects = () => {
 
     useEffect(() => {
         getStudents();
-    },[])
+    }, [])
 
     return (
-        <div className="cardDisplayComponent">
-            {subjects.length > 0 && (
-                <div className='geometry' onClick={() =>navigate('/temas')}>
-                </div>
-            )}
+        <div className="flex flex-col items-start justify-start gap-5 cardDisplayComponent">
+            {subjects.length > 0 && subjects.map((subj: ISubjects) => (
+
+                    <div className={subj.subjectName == 'Geometria' ? 'geometry' : 'other'} onClick={() => navigate('/temas')}>
+                        {subj.subjectName !== 'Geometria' && (subj.subjectName)}
+                    </div>
+            ))}
         </div>
     )
 }
