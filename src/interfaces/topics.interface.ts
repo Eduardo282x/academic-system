@@ -1,5 +1,5 @@
 export interface ITopics {
-    topicId: number;
+    topicIc: number;
     topicName: string;
     topicDescription: string;
     subjectId?: number;
@@ -7,7 +7,7 @@ export interface ITopics {
 }
 
 export interface NewTopics {
-    topicId: number;
+    topicIc: number;
     topicName: string;
     topicDescription: string;
     subjectId?: number;
@@ -17,5 +17,5 @@ export interface IActivities {
     activityId: number;
     activityName: string;
     activityDescription: string;
-    topidId: number;
+    topidIc: number;
 }

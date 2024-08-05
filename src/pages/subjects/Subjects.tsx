@@ -14,6 +14,10 @@ export const Subjects = () => {
         })
     }
 
+    const goTopics = (subjectId: number) => {
+        navigate(`/temas/${subjectId}`)
+    }
+
     useEffect(() => {
         getStudents();
     }, [])
@@ -22,7 +26,7 @@ export const Subjects = () => {
         <div className="flex flex-col items-start justify-start gap-5 cardDisplayComponent">
             {subjects.length > 0 && subjects.map((subj: ISubjects) => (
 
-                    <div className={subj.subjectName == 'Geometria' ? 'geometry' : 'other'} onClick={() => navigate('/temas')}>
+                    <div className={subj.subjectName == 'Geometria' ? 'geometry' : 'other'} onClick={() => goTopics(subj.subjectId)}>
                         {subj.subjectName !== 'Geometria' && (subj.subjectName)}
                     </div>
             ))}

@@ -10,7 +10,7 @@ import { ColorButton } from '../buttonCustom/ButtonCustom';
 import './form.css'
 import TextField from '@mui/material/TextField';
 
-export type KeysForms = 'classroomId' | 'userId' | 'id' | 'subjectId' | 'topicIc';
+export type KeysForms = 'classroomId' | 'userId' | 'id' | 'subjectId' | 'topicIc' | 'activityId';
 
 export const FormComponent: FC<IForm> = ({ title, dataForm, defaultValues, keyWordId, validationSchema, action, onSubmitForm }) => {
 

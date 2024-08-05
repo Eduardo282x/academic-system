@@ -38,12 +38,12 @@ export const menu: IMenu[] = [
         redirect: '/cursos',
         rol: ['Administrador','Estudiante','Profesor']
     },
-    {
-        title: 'Temas',
-        icon: 'menu_book',
-        redirect: '/temas',
-        rol: ['Estudiante','Profesor']
-    },
+    // {
+    //     title: 'Temas',
+    //     icon: 'menu_book',
+    //     redirect: '/temas',
+    //     rol: ['Estudiante','Profesor']
+    // },
     {
         title: 'Asistencias',
         icon: 'back_hand',

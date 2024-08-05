@@ -55,7 +55,7 @@ export const Activities = () => {
         })
     };
     const getActivities = async () => {
-        await getDataApi('topics/activity').then((responseActivities: IActivities[]) => {
+        await getDataApi('activities').then((responseActivities: IActivities[]) => {
             setActivities(responseActivities)
         }).catch((err) => console.log(err))
     }
