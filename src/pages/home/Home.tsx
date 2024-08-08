@@ -16,12 +16,19 @@ export const Home = () => {
                 <p className='my-8'>
                     En el Colegio Jorge Washington, estamos comprometidos con el aprendizaje integral. Explora nuestras aulas virtuales, conoce a nuestros profesores y descubre cómo puedes participar en actividades extracurriculares
                 </p>
-                {/* {menu.map((card: IMenu, index: number) => (
-                    <div key={index} className={`flex ${card.color} p-5 rounded-xl cursor-pointer`} >
-                        <span className="material-icons mr-2 text-[3rem]">{card.icon}</span>
-                        <p className='text-[2rem]'>{card.title}</p>
+
+                <div className="flex flex-wrap justify-around items-start gap-5 w-full">
+                    <div className='imageOne'>
+
                     </div>
-                ))} */}
+                    <div className='imageTwo'>
+
+                    </div>
+                    <div className='imageThree'>
+
+                    </div>
+                </div>
+
             </div>
 
         </div>

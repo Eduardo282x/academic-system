@@ -134,7 +134,6 @@ export const Topics = () => {
     }
 
     const goBack = () => {
-        console.log('Volvi');
         navigate('/cursos')
     }
 
@@ -185,8 +184,8 @@ export const Topics = () => {
                             </div>
                             <Divider />
 
-                            {top.activities.length > 0 && top.activities.map((activities: IActivities)=> (
-                                <>
+                            {top.activities.length > 0 && top.activities.map((activities: IActivities, indexAct: number)=> (
+                                <div key={indexAct}>
                                     <div className="py-4" onClick={() => uploadFile(activities)}>
                                         <div className="flex items-center justify-between">
                                             <div className="flex">
@@ -203,7 +202,7 @@ export const Topics = () => {
                                         <p className='px-2 text-justify mt-4 leading-5'>{activities.activityDescription}</p>
                                     </div>
                                     <Divider />
-                                </>
+                                </div>
                             ))}
                         </div>
                     ))}

@@ -7,3 +7,30 @@
     margin-bottom: 2rem;
     background-image: url('../../assets/img/logoColegio2.png');
 }
+.imageOne{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 12rem;
+    width: 12rem;
+    margin-bottom: 2rem;
+    background-image: url('../../assets/img/imagen1.jpeg');
+}
+.imageTwo{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 12rem;
+    width: 12rem;
+    margin-bottom: 2rem;
+    background-image: url('../../assets/img/imagen2.jpeg');
+}
+.imageThree{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 12rem;
+    width: 12rem;
+    margin-bottom: 2rem;
+    background-image: url('../../assets/img/imagen3.jpeg');
+}
