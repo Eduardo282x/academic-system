@@ -31,7 +31,7 @@ export const postDataApi = async (endpoint: string, data: any): Promise<Response
     return await axios.post(endpoint, data).then((response) => {
         return response.data;
     }).catch((err) => {
-        return err.response.data;
+        return err.response;
     })
 }
 

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {useState} from 'react'
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import instance from '../env/axios-instance';
 
-const useAxiosInterceptos = () => {
+export const useAxiosInterceptos = () => {
     const [message, setMessage] = useState<string>('');
     const [severityType, setSeverityType] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
@@ -13,22 +14,34 @@ const useAxiosInterceptos = () => {
         setOpen(false);
     };
 
+    const isValidMessage = (msg: any) => {
+        return typeof msg === 'string' && msg.trim().length > 2;
+    };
+
     instance.interceptors.response.use(
         (response) => {
             if (['post', 'put', 'delete'].includes(response.config.method || '')) {
-                setMessage(response.data.message || 'Operación exitosa');
-                setSeverityType(true);
-                setOpen(true);
+                const message = response.data?.message;
+                if (isValidMessage(message)) {
+                    setMessage(message || 'hola');
+                    setSeverityType(true);
+                    setOpen(true);
+                }
             }
-            console.log(response);
-            
             return response;
         },
         (error) => {
             if (['post', 'put', 'delete'].includes(error.config.method || '')) {
-                setMessage(error.response?.data?.message || 'Error en la operación');
-                setSeverityType(false);
-                setOpen(true);
+                const message = error.response?.data?.message;
+                if (isValidMessage(message)) {
+                    setMessage(message);
+                    setSeverityType(false);
+                    setOpen(true);
+                } else {
+                    setMessage('Error en la operación');
+                    setSeverityType(false);
+                    setOpen(true);
+                }
             }
             return Promise.reject(error);
         }
@@ -43,4 +56,4 @@ const useAxiosInterceptos = () => {
     )
 }
 
-export default useAxiosInterceptos;
+// export default useAxiosInterceptos;

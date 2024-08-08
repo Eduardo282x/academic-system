@@ -24,6 +24,7 @@ export const UploadForm: React.FC<IUploadForm> = ({ closeDialog, activityId, stu
     const [file, setFile] = React.useState<File | null>(null);
     const [existFile, setExistFile] = React.useState<FilesActivity>();
     const [grade, setGrade] = React.useState<string>('0');
+    const [calificated, setCalificated] = React.useState<boolean>(false);
 
     const user: UserData = userToken();
 
@@ -68,6 +69,7 @@ export const UploadForm: React.FC<IUploadForm> = ({ closeDialog, activityId, stu
 
         if (findGrade) {
             setGrade(findGrade as string);
+            setCalificated(Number(findGrade) > 0)
         }
     }
 
@@ -154,12 +156,12 @@ export const UploadForm: React.FC<IUploadForm> = ({ closeDialog, activityId, stu
                 <div className='flex flex-col items-center justify-center gap-2'>
                     <div className="flex flex-col w-full items-center justify-center">
                         <label className='text-black ml-1'>Colocar nota</label>
-                        <input type="number" min={0} max={20} value={grade} onChange={(event) => setGrade(event.target.value)} className="bg-gray-100 rounded-md w-[8rem] h-12 px-2 text-black outline-none" />
+                        <input type="number" min={0} max={20} value={grade} disabled={calificated} onChange={(event) => setGrade(event.target.value)} className="bg-gray-100 rounded-md w-[8rem] h-12 px-2 text-black outline-none disabled:bg-gray-200 disabled:text-gray-400" />
                     </div>
-                    {Number(grade) > 0 && (
+                    {calificated && (
                         <p className='text-sm font-bold text-red-500'>Ya calificaste esta actividad</p>
                     )}
-                    <Button variant='contained' disabled={Number(grade) > 0} className='my-2' onClick={() => loadGrade(grade)}>Enviar</Button>
+                    <Button variant='contained' disabled={calificated} className='my-2' onClick={() => loadGrade(grade)}>Enviar</Button>
                 </div>
             )}
         </div>

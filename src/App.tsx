@@ -17,7 +17,7 @@ import { userToken } from './backend/authenticate';
 import { Asistent } from './pages/asistent/Asistent';
 import { Profile } from './pages/profile/Profile';
 import { Activities } from './pages/activities/Activities';
-import useAxiosInterceptos from './interceptos/axiosInterceptos';
+import { useAxiosInterceptos } from './interceptos/axiosInterceptos';
 
 const SubjestsRouter = () => {
   const getUserData: UserData = userToken();
