@@ -26,8 +26,6 @@ export const SecondForm: FC<IForm> = ({ title, dataForm, defaultValues, keyWordI
             data: returnForm
         }
 
-        console.log(formData);
-
         onSubmitForm(formData)
     }
 

@@ -26,6 +26,7 @@ export const Layout = () => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
+        navigate('/perfil');
         setAnchorEl(null);
     };
 

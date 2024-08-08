@@ -4,6 +4,7 @@ export interface IUsers {
     name:     string;
     lastname: string;
     username: string;
+    identify: string;
     email:    string;
     age:      string;
     rolId?:    number;

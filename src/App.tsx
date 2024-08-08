@@ -15,6 +15,9 @@ import { UserData } from './interfaces/base-response.interface';
 import { Topics } from './pages/topics/Topics';
 import { userToken } from './backend/authenticate';
 import { Asistent } from './pages/asistent/Asistent';
+import { Profile } from './pages/profile/Profile';
+import { Activities } from './pages/activities/Activities';
+import useAxiosInterceptos from './interceptos/axiosInterceptos';
 
 const SubjestsRouter = () => {
   const getUserData: UserData = userToken();
@@ -28,7 +31,8 @@ const SubjestsRouter = () => {
 
 
 function App() {
-
+  const snackbar = useAxiosInterceptos();
+  
   return (
     <>
       <BrowserRouter>
@@ -37,15 +41,18 @@ function App() {
 
           <Route element={<Layout></Layout>}>
             <Route path="/home" element={<Home />} />
+            <Route path="/perfil" element={<Profile />} />
             <Route path="/salones" element={<Classrooms />} />
-            <Route path="/temas" element={<Topics />} />
+            <Route path="/temas/:id" element={<Topics />} />
             <Route path="/cursos" element={<SubjestsRouter />} />
             <Route path="/asistencia" element={<Asistent />} />
+            <Route path="/actividades" element={<Activities />} />
             <Route path="/usuarios" element={<Users />} />
             <Route path="/alumnos" element={<Students />} />
           </Route>
         </Routes >
       </BrowserRouter>
+      {snackbar}
     </>
   )
 }

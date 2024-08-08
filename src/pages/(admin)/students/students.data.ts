@@ -29,6 +29,12 @@ export const columnsStudents: IColumns[] = [
         filterOption: true
     },
     {
+        header: 'Cedula',
+        column: 'identify',
+        type: 'text',
+        filterOption: true
+    },
+    {
         header: 'Salon',
         column: 'classrooms',
         type: 'text',
@@ -61,6 +67,7 @@ export const body: IUsers = {
     username: '',
     email: '',
     age: '',
+    identify: '',
     classroomId: 0,
 }
 
@@ -69,7 +76,8 @@ export const validationStudents: object = z.object({
     lastname: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
     username: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
     email: z.string().email({message:'Debe ingresar un correo electronico valido'}),
-    age: z.number().max(100, {message: 'La edad no puede ser mayor a 100'}),
+    age: z.number().min(10, {message: 'La edad no puede ser menor a 10'}).max(14, {message: 'La edad no puede ser mayor a 14'}),
+    identify: z.string().refine(text => text.length <= 8 , {message: 'La cedula no puede tener más de 8 caracteres'}),
     classroomId: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
 })
 
@@ -103,6 +111,12 @@ export const dataForm: IDataForm[] = [
         value: '',
         type: 'number',
         name: 'age',
+    },
+    {
+        label: 'Cedula',
+        value: '',
+        type: 'text',
+        name: 'identify',
     },
     {
         label: 'Salón',

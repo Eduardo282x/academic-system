@@ -1,4 +1,7 @@
+import { z } from "zod";
 import { ConfigTable, IColumns } from "../../../interfaces/table.interface";
+import { IDataForm } from "../../../interfaces/form.interface";
+import { ISubjectsApi } from "../../../interfaces/subjects.interface";
 
 export const columnsSubjects: IColumns[] = [
     {
@@ -35,7 +38,34 @@ export const columnsSubjects: IColumns[] = [
     // }
 ];
 
+export const body: ISubjectsApi = {
+    subjectName: '',
+    subjectId: 0,
+    classroomId: 0
+}
+
+export const validationSubjects: object = z.object({
+    subjectName: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
+    classroomId: z.string().refine(text => text !== '', {message: 'El campo es requerido'}),
+})
+
+export const dataForm: IDataForm[] = [
+    {
+        label: 'Nombre de la materia',
+        value: '',
+        type: 'text',
+        name: 'subjectName',
+    },
+    {
+        label: 'Salon',
+        value: '',
+        type: 'select',
+        name: 'classroomId',
+        options: []
+    }
+]
+
 export const configTableSubjects: ConfigTable = {
-    addBtn: false,
+    addBtn: true,
     searchInput: false
 }

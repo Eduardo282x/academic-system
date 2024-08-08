@@ -9,6 +9,15 @@ export const getDataApi = (endpoint: string) => {
         return err.response.data;
     })
 }
+export const getDataFileApi = (endpoint: string) => {
+    return axios.get(endpoint, {
+        responseType: 'blob'
+    }).then((response) => {
+        return response.data;
+    }).catch(err => {
+        return err.response.data;
+    })
+}
 
 export const getParamsDataApi = (endpoint: string, params: any) => {
     return axios.get(endpoint, {params}).then((response) => {
@@ -18,8 +27,21 @@ export const getParamsDataApi = (endpoint: string, params: any) => {
     })
 }
 
-export const postDataApi = async (endpoint: string, data: any): Promise<ResponseLogin | BaseResponse> => {
+export const postDataApi = async (endpoint: string, data: any): Promise<ResponseLogin | BaseResponse | any> => {
     return await axios.post(endpoint, data).then((response) => {
+        return response.data;
+    }).catch((err) => {
+        return err.response.data;
+    })
+}
+
+export const postFilesDataApi = async (endpoint: string, file: File): Promise<ResponseLogin | BaseResponse> => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    return await axios.post(endpoint, formData, { headers: {
+        "Content-Type": "multipart/form-data",
+    },}).then((response) => {
         return response.data;
     }).catch((err) => {
         return err.response.data;
