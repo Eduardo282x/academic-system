@@ -41,7 +41,7 @@ export const Activities = () => {
 
     const openConsultStudent = (student: IStudent, activity: IActivities) => {
         setActivityId(activity.activityId);
-        setStudentId(student.studentId as number);
+        setStudentId(student.userId as number);
         handleClickOpen();
     }
 

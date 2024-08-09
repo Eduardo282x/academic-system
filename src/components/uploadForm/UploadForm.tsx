@@ -158,10 +158,13 @@ export const UploadForm: React.FC<IUploadForm> = ({ closeDialog, activityId, stu
                         <label className='text-black ml-1'>Colocar nota</label>
                         <input type="number" min={0} max={20} value={grade} disabled={calificated} onChange={(event) => setGrade(event.target.value)} className="bg-gray-100 rounded-md w-[8rem] h-12 px-2 text-black outline-none disabled:bg-gray-200 disabled:text-gray-400" />
                     </div>
+                    {Number(grade) > 20 && (
+                        <p className='text-sm font-bold text-red-500'>La nota no puede ser mayor a 20</p>
+                    )}
                     {calificated && (
                         <p className='text-sm font-bold text-red-500'>Ya calificaste esta actividad</p>
                     )}
-                    <Button variant='contained' disabled={calificated} className='my-2' onClick={() => loadGrade(grade)}>Enviar</Button>
+                    <Button variant='contained' disabled={calificated || Number(grade) > 20} className='my-2' onClick={() => loadGrade(grade)}>Enviar</Button>
                 </div>
             )}
         </div>
