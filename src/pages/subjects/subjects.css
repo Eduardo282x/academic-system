@@ -7,7 +7,41 @@
     height: 10rem;
     border-radius: 1rem;
 }
+.bg-subject-blue{
+    background-image: url('../../assets/img/bk-blue-subject.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 10rem;
+    border-radius: 1rem;
+}
+.bg-subject-pink{
+    background-image: url('../../assets/img/bg-pink-subject.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 10rem;
+    border-radius: 1rem;
+}
+.bg-subject-green{
+    background-image: url('../../assets/img/bg-green-subject.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 10rem;
+    border-radius: 1rem;
+}
 
+.bg-subject-blue,.bg-subject-pink,.bg-subject-green{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+}
 .other{
     width: 100%;
     height: 10rem;

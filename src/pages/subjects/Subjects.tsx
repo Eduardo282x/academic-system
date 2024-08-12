@@ -26,8 +26,8 @@ export const Subjects = () => {
         <div className="flex flex-col items-start justify-start gap-5 cardDisplayComponent">
             {subjects.length > 0 && subjects.map((subj: ISubjects) => (
 
-                    <div className={subj.subjectName == 'Geometria' ? 'geometry' : 'other'} onClick={() => goTopics(subj.subjectId)}>
-                        {subj.subjectName !== 'Geometria' && (subj.subjectName)}
+                    <div className={subj.subjectClassName} onClick={() => goTopics(subj.subjectId)}>
+                        {subj.subjectName}
                     </div>
             ))}
         </div>
