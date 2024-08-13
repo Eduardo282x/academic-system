@@ -3,7 +3,13 @@ export interface ITopics {
     topicName: string;
     topicDescription: string;
     subjectId?: number;
-    activities: IActivities[]
+    activities: IActivities[];
+    FilesTopics: FilesTopics[];
+}
+export interface FilesTopics {
+    fileId:   number;
+    filePath: string;
+    topicId:  number;
 }
 
 export interface NewTopics {

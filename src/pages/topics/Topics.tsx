@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { IActivities, ITopics, NewTopics } from '../../interfaces/topics.interface';
-import { getDataApi, postFilesDataApi } from '../../backend/BaseAxios';
+import { FilesTopics, IActivities, ITopics, NewTopics } from '../../interfaces/topics.interface';
+import { getDataApi, getDataFileApi, postFilesDataApi } from '../../backend/BaseAxios';
 import './topics.css';
 import { Button, Divider, IconButton } from '@mui/material';
 import { UserData } from '../../interfaces/base-response.interface';
@@ -14,11 +14,13 @@ import { UploadForm } from '../../components/uploadForm/UploadForm';
 import { ColorButton } from '../../components/buttonCustom/ButtonCustom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ISubjects } from '../../interfaces/subjects.interface';
+import { UploadFileForm } from '../../components/uploadFileForm/UploadFileForm';
 
 export const Topics = () => {
     const navigate = useNavigate();
     const [subject, setSubject] = useState<ISubjects>();
     const [topics, setTopics] = useState<ITopics[]>([]);
+    const [topicsSelected, setTopicsSelected] = useState<ITopics>();
     const [showBtnAdd, setShowBtnAdd] = useState<boolean>(false);
     const [showBtnEdit, setShowBtnEdit] = useState<boolean>(false);
     const [activity, setActivity] = useState<IActivities>();
@@ -36,12 +38,14 @@ export const Topics = () => {
     const [titleActivity, setTitleActivity] = useState<string>('Agregar nueva Actividad');
     const [actionActivity, setActionActivity] = useState<actionsValid>('addApi');
 
+    const [openUpload, setOpenUpload] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [openActivity, setOpenActivity] = useState<boolean>(false);
 
     const handleClickOpen = () => setOpen(true);
     const handleClickOpenActivity = () => setOpenActivity(true);
 
+    const handleCloseUpload = () => setOpenUpload(false);
     const handleClose = () => setOpen(false);
     const handleCloseActivity = () => setOpenActivity(false);
 
@@ -49,6 +53,12 @@ export const Topics = () => {
         await postFilesDataApi(`activities?activityId=${activity?.activityId}&studentId=${user.id}`, file as File);
         handleClose();
     }
+
+    const sendFileTopicsData = async (file: File | null) => {
+        await postFilesDataApi(`topics/file/${topicsSelected?.topicIc}`, file as File);
+        handleCloseUpload();
+    }
+
     const getSubject = async (subjectId: string | undefined) => {
         await getDataApi(`subjects/${subjectId}`).then((responseSubject: ISubjects) => {
             setSubject(responseSubject)
@@ -91,18 +101,24 @@ export const Topics = () => {
         handleClickOpen();
     }
 
-    const editActivity = (topic: IActivities,topicId: number) => {
+    const editActivity = (topic: IActivities, topicId: number) => {
         setTopicId(topicId);
         openDialogActivities({
             data: topic,
             action: 'edit'
         })
     }
+
     const editTopic = (topic: ITopics) => {
         openDialog({
             data: topic,
             action: 'edit'
         })
+    }
+
+    const uploadFileTopic = (topic: ITopics) => {
+        setTopicsSelected(topic);
+        setOpenUpload(true);
     }
 
     const openDialog = async (tableReturn: TableReturn) => {
@@ -132,6 +148,25 @@ export const Topics = () => {
 
         if (responseBaseApi) { getTopics(id); }
     }
+
+    const downloadFileTopic = async (fileTopic: FilesTopics) => {
+        const response = await getDataFileApi(`topics/file/${fileTopic.fileId}`);
+
+        const url = window.URL.createObjectURL(response);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = fileTopic.filePath as string; // Cambia el nombre del archivo según tus necesidades
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    const fileIcon = (fileName: string) => {
+        if (/\.(jpg|jpeg|png|gif)$/i.test(fileName)) return 'image';
+        if (/\.pdf$/i.test(fileName)) return 'picture_as_pdf';
+        if (/\.docx?$/i.test(fileName)) return 'description';
+        return 'picture_as_pdf'; // Icono genérico para otros tipos de archivos
+    };
 
     const goBack = () => {
         navigate('/cursos')
@@ -169,13 +204,28 @@ export const Topics = () => {
                                     </div>
 
                                     {showBtnEdit && (
-                                        <IconButton color="primary" onClick={() => editTopic(top)}>
-                                            <span className="material-icons-round ">edit</span>
-                                        </IconButton>
+                                        <div>
+                                            <IconButton color="primary" onClick={() => uploadFileTopic(top)}>
+                                                <span className="material-icons-round ">upload</span>
+                                            </IconButton>
+
+                                            <IconButton color="primary" onClick={() => editTopic(top)}>
+                                                <span className="material-icons-round ">edit</span>
+                                            </IconButton>
+                                        </div>
                                     )}
                                 </div>
                                 <p className='px-2 mt-4 leading-5 text-justify'>{top.topicDescription}</p>
-
+                                <div className="flex flex-wrap mt-5 gap-5">
+                                    {top.FilesTopics && top.FilesTopics.map((fil: FilesTopics, indexFile: number) => (
+                                        <div key={indexFile} className='flex items-center justify-center gap-5' onClick={() => downloadFileTopic(fil)}>
+                                            <span className="material-icons-round text-red-600">
+                                                {fileIcon(fil.filePath)}
+                                            </span>
+                                            <p >{fil.filePath}</p>
+                                        </div>
+                                    ))}
+                                </div>
                                 {showBtnEdit && (
                                     <div className='flex items-center justify-center  w-full'>
                                         <ColorButton className='w-[80%] !p-2 mx-auto !mt-6 !mb-0' onClick={() => addActivity(top.topicIc)}>Agregar actividad</ColorButton>
@@ -184,7 +234,7 @@ export const Topics = () => {
                             </div>
                             <Divider />
 
-                            {top.activities.length > 0 && top.activities.map((activities: IActivities, indexAct: number)=> (
+                            {top.activities.length > 0 && top.activities.map((activities: IActivities, indexAct: number) => (
                                 <div key={indexAct}>
                                     <div className="py-4" onClick={() => uploadFile(activities)}>
                                         <div className="flex items-center justify-between">
@@ -210,6 +260,17 @@ export const Topics = () => {
 
 
             </div>
+
+            <Dialog
+                open={openUpload}
+                onClose={handleCloseUpload}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <UploadFileForm closeDialog={sendFileTopicsData}>
+
+                </UploadFileForm>
+            </Dialog>
 
             <Dialog
                 open={open}

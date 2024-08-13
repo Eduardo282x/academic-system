@@ -3,6 +3,7 @@ export interface ISubjects {
     subjectName: string;
     classroomId: number;
     classrooms:  string;
+    subjectClassName:  string;
 }
 export interface ISubjectsApi {
     subjectId:   number;
