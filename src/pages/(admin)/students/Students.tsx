@@ -64,7 +64,9 @@ export const Students = () => {
 
     const openDialog = async (tableReturn: TableReturn) => {
         const { data, action } = tableReturn;
-        data.classroomId = data.classroomId.toString()
+        if(data){
+            data.classroomId = data.classroomId.toString()
+        }
         const responseBaseApi: BaseApiReturn = await BaseApi(action, data, body, 'userId', 'users/students');
         if (responseBaseApi.open) { handleClickOpen() }
         if (responseBaseApi.close) { handleClose() }
